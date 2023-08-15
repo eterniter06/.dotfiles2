@@ -1,0 +1,16 @@
+{
+  "dart-vim-plugin": { "branch": "master", "commit": "928302ec931caf0dcf21835cca284ccd2b192f7b" },
+  "dracula": { "branch": "master", "commit": "6495b4ff40479ec7705addb4ea800ec308026648" },
+  "dressing.nvim": { "branch": "master", "commit": "b2c644abfaae7523bb393b0c452adf3ebdaf53dc" },
+  "flutter-tools.nvim": { "branch": "main", "commit": "b65ad58462116785423d81aeb2ee6c8c16f78679" },
+  "glow.nvim": { "branch": "main", "commit": "238070a686c1da3bccccf1079700eb4b5e19aea4" },
+  "haskell-tools.nvim": { "branch": "1.x.x", "commit": "0bf0c887eeb7febe2199b7638befb4138d293111" },
+  "lazy.nvim": { "branch": "main", "commit": "96584866b9c5e998cbae300594d0ccfd0c464627" },
+  "neoformat": { "branch": "master", "commit": "209b56a00fc0206d81db768b121b94d0daf48b64" },
+  "nvim-surround": { "branch": "main", "commit": "703ec63aa798e5e07d309b35e42def34bebe0174" },
+  "plenary.nvim": { "branch": "master", "commit": "55d9fe89e33efd26f532ef20223e5f9430c8b0c0" },
+  "telescope-fzf-native.nvim": { "branch": "main", "commit": "6c921ca12321edaa773e324ef64ea301a1d0da62" },
+  "telescope.nvim": { "branch": "master", "commit": "d90956833d7c27e73c621a61f20b29fdb7122709" },
+  "vim-airline": { "branch": "master", "commit": "ff7352e4bff02eb600a136b6fd741404f3195371" },
+  "vim-airline-themes": { "branch": "master", "commit": "a9aa25ce323b2dd04a52706f4d1b044f4feb7617" }
+}

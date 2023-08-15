@@ -1,0 +1,97 @@
+Config { 
+         font = "Overpass 14"
+       , additionalFonts = 
+           [ "FiraCode Nerd font 14"
+           ]
+       , borderColor = "white"
+       , bgColor = "#111111"
+       , fgColor = "#D1EEFF"
+       , alpha = 128
+       , position = Top
+       , textOffset = 1
+       , iconOffset = 0
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "."
+       , allDesktops = True
+       , overrideRedirect = True
+       , commands = [
+                        Run Weather "VEBS" 
+                            [
+                                  "-t"      , "<skyCondition>: <tempC>°C"
+                                , "-L"      , "18"
+                                , "-H"      , "25"
+                                , "--low"   , "lightblue"
+                                , "--normal", "green"
+                                , "--high"  , "#ce7aff"
+                            ] 18000
+                        , Run DynNetwork
+                            [
+                                  "--template", "<fc=#52b9ff><fn=1>\xf019</fn>  <rx>Kb</fc>  <fc=#ce7aff><fn=1>\xf093</fn>  <tx>Kb</fc>"
+                            ] 10
+                        , Run Cpu 
+                            [
+                                  "--template", "<fn=1></fn>  <total>%"
+                                ,  "-L"       , "0"
+                                ,  "-H"       , "70"
+                                ,  "--normal" , "#52b9ff"
+                                ,  "--high"   , "#ce7aff"
+                            ] 10
+                        , Run Memory
+                            [
+                                   "--template", "<fn=1></fn>  <usedratio>%"
+                            ] 10
+                        , Run Date "<fc=#52b9ff>%a %_d   <fn=1></fn>  %H:%M:%S</fc>" "date" 5
+                        , Run Battery
+                            [
+                            "--template" , "<acstatus>"
+                            , "--Low"      , "20"        -- units: %
+                            , "--High"     , "70"        -- units: %
+                            , "--low"      , "#CE7AFF"
+                            , "--normal"   , "#52b9ff"
+                            , "--high"     , "#52b9ff"
+                            , "--" -- battery specific options
+                                       -- discharging status - use icons
+                                       -- Possible charging animation
+                                       , "-f"   ,  "<fn=1>\xf244\xf243\xf243\xf243\xf242\xf242\xf242\xf241\xf241\xf240</fn>"
+                                       , "-l"   ,  "#CE7AFF"
+                                       , "-m"   ,  "#0071BC"
+                                       , "-h"   ,  "#52b9ff"
+                                       , "-o"   , ""
+                                       , "--lows"     , "<fn=1></fn>: <left>% <timeleft>"
+                                       , "--mediums"  , "<fn=1></fn>: <left>% <timeleft>"
+                                       , "--highs"    , "<fn=1></fn>: <left>% <timeleft>"
+
+                                       -- AC "on" status
+                                       , "-O"  , "<fn=1></fn>: <left>% <timeleft>"
+
+                                       -- charged status
+                                       , "-i"  , "<fn=1></fn>"
+-- Annoying at times
+--                                       , "-a", "notify-send -u critical 'Battery running out!!'"
+                                       , "-A", "20"
+                             ] 50
+                        , Run Brightness
+                            [
+                                "--template", "<fn=0>☼</fn> <percent>%"
+                              ,"-L", "31"
+                              ,"-l", "#52b9ff"
+                              ,"-H", "59"
+                              ,"-h", "#CE7AFF"
+                              , "--"
+                                  , "-D", "intel_backlight"
+                            ] 5
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "%cpu% | %memory% | %dynnetwork%}\
+                    \%date%\
+                    \{%bright% | %VEBS% | %battery% "
+       }
+-- Bagdogra is ??
+-- Bhubaneswar is VEBS
+-- Add uptime since start of battery discharge
+-- Fix wifi/internet status
+-- Fix Battery colour indicator

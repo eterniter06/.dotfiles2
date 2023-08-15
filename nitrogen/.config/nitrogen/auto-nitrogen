@@ -1,0 +1,69 @@
+#!/bin/bash
+
+selectDarkBreak(){
+    if [ $hour -eq 4 ] || [ $hour -eq 16 ]; then
+        wallpaper=${variants[pink]}
+    elif [ $hour -ge 6 ] && [ $hour -lt 18 ]; then
+        wallpaper=${variants[sky]}
+    elif [ $hour -eq 8 ] || [ $hour -eq 20 ]; then
+        wallpaper=${variants[purple]}
+    elif [ $hour -eq 12 ] || [ $hour -eq 0 ]; then
+        wallpaper=${variants[green]}
+    else
+        wallpaper=${variants[blue]}
+    fi
+}
+
+selectMinimalistic(){
+    if [ $hour -eq 0 ]; then
+        wallpaper=${variants[midnight]}
+    elif [ $hour -ge 5 ] && [ $hour -lt 16 ]; then
+        wallpaper=${variants[morning]}
+    elif [ $hour -ge 16 ] && [ $hour -lt 20 ]; then
+        wallpaper=${variants[evening]}
+    else
+        wallpaper=${variants[night]}
+    fi
+}
+
+main(){
+
+    USER=/home/infinity
+    CONFIG_DIR=$USER/.config/nitrogen
+    nitrologger=$CONFIG_DIR/nitrologger
+
+    currentTime=($(date))
+    $nitrologger "${currentTime[*]}"
+
+    WALLPAPER_DIRECTORY=$USER/Pictures/wallpapers
+
+    declare -A variants=( 
+        [sky]=sky.png
+        [blue]=blue.png
+        [pink]=pink.png
+        [purple]=purple.png
+        [green]=green.png
+        [red]=red.png
+        [night]=night.jpg
+        [morning]=morning.jpg
+        [evening]=evening.png
+        [midnight]=midnight.png
+    )
+
+    while [ 0 -eq 0 ]; do
+
+        currentTime=($(date))
+        hour=$((10#$(date +%H)))
+        minute=$((10#$(date +%M)))
+        second=$((10#$(date +%S)))
+
+        selectMinimalistic
+
+        nitrogen --set-tiled $WALLPAPER_DIRECTORY/$wallpaper
+        $nitrologger "${currentTime[*]}" $wallpaper
+
+        sleep $((60 - (minute + 1)))m $((60 - second))s
+    done
+}
+
+main

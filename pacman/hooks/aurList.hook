@@ -1,0 +1,11 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Operation = Remove
+Type = Package
+Target = *
+
+[Action]
+Description = Get list of foreign(mostly AUR) packages
+When = PostTransaction
+Exec = /bin/sh -c '/usr/bin/pacman -Qqem > /home/infinity/.dotfiles2/pacman/aurList.txt'

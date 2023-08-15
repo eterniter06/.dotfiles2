@@ -1,0 +1,15 @@
+#!/bin/bash
+
+time=$1
+logfile=$HOME/log.autonitrogen
+wallpaper=$2
+
+if [ $# -eq 2 ];then
+    if [ $2 == "killed" ]; then
+        echo -e "$time: Auto-Nitrogen killed.\n" >> "$logfile"
+    else
+        echo -e "$time: Wallpaper updated to $wallpaper" >> "$logfile"
+    fi
+else
+    echo -e "$time: Auto-Nitrogen started" >> "$logfile"
+fi

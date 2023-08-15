@@ -1,0 +1,9 @@
+[submodule "/home/infinity/.dotfiles2/rofi/.local/bin"]
+	path = /home/infinity/.dotfiles2/rofi/.local/bin
+	url = git@github.com:eterniter06/rofi-bluetooth.git
+[submodule "/home/infinity/.dotfiles2/rofi-bluetooth/.local/bin"]
+	path = /home/infinity/.dotfiles2/rofi-bluetooth/.local/bin
+	url = git@github.com:eterniter06/rofi-bluetooth.git
+[submodule "rofi-bluetooth/.local/bin"]
+	path = rofi-bluetooth/.local/bin
+	url = git@github.com:eterniter06/rofi-bluetooth.git
