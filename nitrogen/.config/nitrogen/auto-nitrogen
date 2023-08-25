@@ -1,0 +1,54 @@
+#!/bin/bash
+
+selectWallpaper(){
+
+    declare -A variants=( 
+                            [sky]=sky.png
+                            [blue]=blue.png
+                            [pink]=pink.png
+                            [purple]=purple.png
+                            [green]=green.png
+                            [red]=red.png
+    )
+
+    if [ $hour -eq 4 ] || [ $hour -eq 16 ]; then
+        wallpaper=${variants[pink]}
+    elif [ $hour -ge 6 ] && [ $hour -lt 18 ]; then
+        wallpaper=${variants[sky]}
+    elif [ $hour -eq 8 ] || [ $hour -eq 20 ]; then
+        wallpaper=${variants[purple]}
+    elif [ $hour -eq 12 ] || [ $hour -eq 0 ]; then
+        wallpaper=${variants[green]}
+    else
+        wallpaper=${variants[blue]}
+    fi
+}
+
+main(){
+
+    USER=/home/infinity
+    CONFIG_DIR=$USER/.config/nitrogen
+    nitrologger=$CONFIG_DIR/nitrologger
+
+    currentTime=($(date))
+    $nitrologger "${currentTime[*]}"
+
+    WALLPAPER_DIRECTORY=$USER/Pictures/wallpapers
+
+    while [ 0 -eq 0 ]; do
+
+        currentTime=($(date))
+        hour=$((10#$(date +%H)))
+        minute=$((10#$(date +%M)))
+        second=$((10#$(date +%S)))
+
+        selectWallpaper
+
+        nitrogen --set-auto $WALLPAPER_DIRECTORY/$wallpaper
+        $nitrologger "${currentTime[*]}" $wallpaper
+
+        sleep $((60 - (minute + 1)))m $((60 - second))s
+    done
+}
+
+main

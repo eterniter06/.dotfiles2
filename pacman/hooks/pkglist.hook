@@ -1,0 +1,11 @@
+[Trigger]
+Operation = Install
+Operation = Upgrade
+Operation = Remove
+Type = Package
+Target = *
+
+[Action]
+Description = Get list of packages installed from the official repo
+When = PostTransaction
+Exec = /bin/sh -c '/usr/bin/pacman -Qqen > /home/infinity/.dotfiles2/pacman/pkgList.txt'

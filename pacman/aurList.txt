@@ -1,0 +1,9 @@
+apfs-fuse-git
+cloudflare-warp-bin
+dxvk-bin
+haskell-language-server-static
+jmtpfs
+kotatogram-desktop-bin
+pam_usb
+visual-studio-code-bin
+volnoti

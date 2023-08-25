@@ -1,0 +1,34 @@
+Config { 
+         font = "Overpass 14"
+       , additionalFonts = 
+           [
+            "xft:FiraCode Nerd font:pixelsize=16:antialias=true:hinting=true"
+           ,"xft:FiraCode Nerd font:pixelsize=20:antialias=true:hinting=true"
+           ,"xft:FiraCode Nerd font:pixelsize=26:antialias=true:hinting=true"
+           ]
+
+       , borderColor = "black"
+       , bgColor = "#000000"
+       , fgColor = "#DDDDDD"
+       , position = Bottom
+       , alpha = 255
+       , textOffset = 1
+       , iconOffset = 0
+       , lowerOnStart = True
+       , pickBroadest = False
+       , persistent = False
+       , hideOnStart = False
+       , iconRoot = "."
+       , allDesktops = True
+       , overrideRedirect = True
+       , commands = [
+                        Run UnsafeXMonadLog
+-- Commented as it freezes the bar
+-- Experimentally run for every other minute; Ideally should be every few hours
+                        , Run Com "bash" ["-c", "updates=$(checkupdates | wc -l); if [ $updates -eq 0 ]; then uname -r; else echo $updates; fi"] "checkupdates" 6000
+                        , Run Com "bash" ["-c", "rofi-bluetooth --status"] "bt" 1
+                    ]
+       , sepChar = "%"
+       , alignSep = "}{"
+       , template = "<fn=1></fn> %UnsafeXMonadLog%} | %checkupdates% | {%bt%"
+       }
