@@ -6,6 +6,7 @@
  * Xmonad
  * Xmobar
  * Stow
+ * Bash (>=4.0)
 
 ## Usage
 
@@ -23,13 +24,6 @@ git submodule update
 ```
 
 ### Installation
-
-**IMPORTANT:** Some files and script in this respository make use of a hardcoded username. Please change those hardcoded usernames to match your username before using and running the scripts.
-
-To see the files and line number of the hardcoded username:
-```
-grep -nIr infinity *
-```
 
 The installation script comprises 6 functions:
 1. Installing important packages from the official arch repo
@@ -52,6 +46,9 @@ Inspect the stow script(and comment out packages not needed) and then run the sc
 
 ## Wallpaper links
 - [Dark Break](https://www.deviantart.com/kasjopaja87/art/Dark-Break-Multicolors-537281115)
+- [Morning](https://wallspic.com/image/21185-biome-mountain-daytime-creative_arts-mount_scenery)
+- [Lakeside Sunset by Louis Coyle](https://dribbble.com/shots/1828176-Lakeside-Sunset)
+- [The Valley by Louis Coyle](https://dribbble.com/shots/12078823-The-Valley)
 - I could not find the original source for the yosemite-forest wallpaper. Please let me know if anyone finds the original source
 
 If I'm accidentally infringing on any copyrights pertaining to any of the resources I have used such as but not limited to wallpapers, themes and fonts, please send me a message and I will remove the non-free resource immediately.

@@ -96,4 +96,5 @@ main(){
     setup_grub
 }
 
+./setup_username.bash
 main

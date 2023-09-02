@@ -1,5 +1,7 @@
 #!/bin/bash
 
+./setup_username.bash
+
 stow \
     alacritty \
     bash \
