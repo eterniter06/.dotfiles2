@@ -166,3 +166,5 @@ source /usr/share/git/completion/git-completion.bash
 
 # QMK auto-competion
 source ~/qmk_firmware/util/qmk_tab_complete.sh
+
+export SUDO_ASKPASS=$HOME/.local/bin/askpass-rofi
