@@ -3,6 +3,7 @@ alacritty
 alsa-firmware
 alsa-plugins
 alsa-utils
+android-file-transfer
 android-tools
 android-udev
 arandr
@@ -50,7 +51,9 @@ git
 gnome-keyring
 gparted
 gpick
+gradle
 grub
+gtest
 gtk-engine-murrine
 htop
 intltool
@@ -88,10 +91,8 @@ libxrandr
 libxss
 linux
 linux-firmware
-linux-zen
 lmms
 lsp-plugins
-lutris
 lxappearance
 lynx
 m4
@@ -105,6 +106,7 @@ ncdu
 neofetch
 neovim
 net-tools
+netplan
 networkmanager
 nitrogen
 nm-connection-editor
@@ -133,11 +135,13 @@ pipewire-alsa
 pipewire-pulse
 pkgconf
 playerctl
+plymouth
 postgresql
 python-openpyxl
 python-pip
 python-psutil
 python-pyalsa
+python-stem
 qbittorrent
 qemu-full
 qmk
@@ -175,9 +179,12 @@ texlive-publishers
 thunar
 tk
 tlp
+tor
+torsocks
 traceroute
 transmission-gtk
 tree
+tumbler
 unrar
 unzip
 vim
