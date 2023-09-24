@@ -170,9 +170,10 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
 
     ++
 
-    -- Menu keybinds
-    [ ((modm, xK_p), spawn myRofi)
-    , ((modm .|. shiftMask, xK_p), spawn myRofiBluetooth)
+    -- Rofi Menu keybinds
+    [ ((modm, xK_z), spawn myRofi)
+    , ((modm, xK_p), spawn myRofi)
+    , ((modm .|. shiftMask, xK_z), spawn myRofiBluetooth)
     ] ++
     -- launch default terminal
        [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)

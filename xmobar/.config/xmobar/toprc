@@ -72,7 +72,8 @@ Config {
 
                                        -- charged status
                                        , "-i"  , "<fn=1></fn>"
-                                       , "-a", "notify-send -u critical 'Battery running out!!'"
+-- Annoying at times
+--                                       , "-a", "notify-send -u critical 'Battery running out!!'"
                                        , "-A", "20"
                              ] 50
                         , Run Brightness
