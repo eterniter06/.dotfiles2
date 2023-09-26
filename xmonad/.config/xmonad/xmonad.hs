@@ -174,6 +174,7 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
     [ ((modm, xK_z), spawn myRofi)
     , ((modm, xK_p), spawn myRofi)
     , ((modm .|. shiftMask, xK_z), spawn myRofiBluetooth)
+    , ((modm .|. shiftMask, xK_p), spawn myRofiBluetooth)
     ] ++
     -- launch default terminal
        [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
