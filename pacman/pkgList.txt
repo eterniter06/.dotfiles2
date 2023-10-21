@@ -20,6 +20,7 @@ boost
 bridge-utils
 cabal-install
 calf
+calibre
 ccls
 chromium
 clang
@@ -29,7 +30,6 @@ ctags
 debugedit
 deluge
 deluge-gtk
-discord
 dnscrypt-proxy
 dnsmasq
 dunst
@@ -38,7 +38,6 @@ efibootmgr
 evtest
 exfat-utils
 fakeroot
-feh
 firefox
 firewalld
 flake8
@@ -56,6 +55,7 @@ grub
 gtest
 gtk-engine-murrine
 htop
+inkscape
 intltool
 iptables-nft
 jdk-openjdk
@@ -91,7 +91,6 @@ libxrandr
 libxss
 linux
 linux-firmware
-lmms
 lsp-plugins
 lxappearance
 lynx
@@ -120,6 +119,7 @@ ntfs-3g
 nvidia-dkms
 nvidia-prime
 nvidia-settings
+nyx
 obs-studio
 obsidian
 okular
