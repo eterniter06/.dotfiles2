@@ -150,6 +150,7 @@ shopt -s cdspell
 export _JAVA_AWT_WM_NONREPARENTING=1
 
 export GPG_TTY=$(tty)
+
 export PATH="/opt/flutter/bin:$PATH" 
 
 # fzf settings 
@@ -168,3 +169,4 @@ source /usr/share/git/completion/git-completion.bash
 source ~/qmk_firmware/util/qmk_tab_complete.sh
 
 export SUDO_ASKPASS=$HOME/.local/bin/askpass-rofi
+PATH="$PATH:/opt/android-studio/bin"
