@@ -30,10 +30,10 @@ main(){
 
     USER=/home/infinity
     CONFIG_DIR=$USER/.config/nitrogen
-    nitrologger=$CONFIG_DIR/nitrologger
+    # nitrologger=$CONFIG_DIR/nitrologger
 
     currentTime=($(date))
-    $nitrologger "${currentTime[*]}"
+    # $nitrologger "${currentTime[*]}"
 
     WALLPAPER_DIRECTORY=$USER/Pictures/wallpapers
 
@@ -60,7 +60,7 @@ main(){
         selectMinimalistic
 
         nitrogen --set-tiled $WALLPAPER_DIRECTORY/$wallpaper
-        $nitrologger "${currentTime[*]}" $wallpaper
+        # $nitrologger "${currentTime[*]}" $wallpaper
 
         sleep $((60 - (minute + 1)))m $((60 - second))s
     done
