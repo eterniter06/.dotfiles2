@@ -1,12 +1,13 @@
 # Dotfiles2
 
-## OS/Requirements
+## Requirements
  * Arch linux
  * Git
  * Xmonad
  * Xmobar
  * Stow
  * Bash (>=4.0)
+ * (To be updated)
 
 ## Usage
 
