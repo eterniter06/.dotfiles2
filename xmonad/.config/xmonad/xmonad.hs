@@ -98,8 +98,8 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
 
     [ ((0, xF86XK_AudioRaiseVolume), spawn $ "amixer -q set Master on 2%+" ++ " && " ++ volnotiVol)
     , ((0, xF86XK_AudioLowerVolume), spawn $ "amixer -q set Master on 2%-" ++ " && " ++ volnotiVol)
-    , ((0, xF86XK_AudioPlay),    spawn "playerctl play")
-    , ((0, xF86XK_AudioPause),   spawn "playerctl pause")
+    , ((0, xF86XK_AudioPlay),    spawn "playerctl play-pause")
+    , ((0, xF86XK_AudioPause),   spawn "playerctl play-pause")
     , ((0, xF86XK_AudioNext),    spawn "playerctl next")
     , ((0, xF86XK_AudioPrev),    spawn "playerctl previous")
 
