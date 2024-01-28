@@ -87,8 +87,8 @@ winKey = mod4Mask
 myRofi = "rofi -show drun -theme /$HOME/.config/rofi/launchers/type-3/style-2.rasi"
 myRofiBluetooth = "rofi-bluetooth -theme /$HOME/.config/rofi/launchers/type-7/style-4.rasi"
 
-volCmd = "awk -F\"[][]\" '/Left:/ { print $2 }' <(amixer sget Master)"
-volnotiVol = "volnoti-show $(" ++ volCmd ++ ")"
+brightnessController = "$HOME/.config/xmonad/brightness "
+volumeController = "$HOME/.config/xmonad/volume "
 
 screenshot = "killall picom; flameshot gui; picom --daemon"
 
@@ -96,19 +96,15 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
   M.fromList
     $
 
-    [ ((0, xF86XK_AudioRaiseVolume), spawn $ "amixer -q set Master on 2%+" ++ " && " ++ volnotiVol)
-    , ((0, xF86XK_AudioLowerVolume), spawn $ "amixer -q set Master on 2%-" ++ " && " ++ volnotiVol)
+    [ ((0, xF86XK_AudioRaiseVolume), spawn $ volumeController ++ "--inc")
+    , ((0, xF86XK_AudioLowerVolume), spawn $ volumeController ++ "--dec")
     , ((0, xF86XK_AudioPlay),    spawn "playerctl play-pause")
     , ((0, xF86XK_AudioPause),   spawn "playerctl play-pause")
     , ((0, xF86XK_AudioNext),    spawn "playerctl next")
     , ((0, xF86XK_AudioPrev),    spawn "playerctl previous")
 
     -- Volume mute
-    -- Needs fix/boolean counter/script to display proper icon: mute vs unmute
-    , ((0, xF86XK_AudioMute), spawn $ "amixer -q set Master toggle" ++ " && " ++ "volnoti-show -m")
-
-    -- Volume 0
-    , ((modm .|. shiftMask, xF86XK_AudioMute), spawn $"amixer -q set Master off 0%" ++ " && " ++ volnotiVol)
+    , ((0, xF86XK_AudioMute), spawn $ volumeController ++ "--toggle_mute")
 
     -- Media play/pause
     , ((modm, xF86XK_AudioMute), spawn "playerctl play-pause")
@@ -122,8 +118,8 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
 
     ++
 
-    [ ((0, xF86XK_MonBrightnessUp),     spawn "$HOME/.config/xmonad/brightness -inc")
-    , ((0, xF86XK_MonBrightnessDown),   spawn "$HOME/.config/xmonad/brightness -dec")
+    [ ((0, xF86XK_MonBrightnessUp),     spawn $ brightnessController ++ "-inc")
+    , ((0, xF86XK_MonBrightnessDown),   spawn $ brightnessController ++ "-dec")
     ]
     
     ++

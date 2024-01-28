@@ -1,0 +1,39 @@
+#!/bin/bash
+
+increment_val=2
+
+volnotify(){
+    toggle_status=$(awk -F"[][]" '/Left:/ { print $4 }' <(amixer sget Master))
+    volume=$(awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master))
+
+    if [ "$toggle_status" == "on" ];then
+        volnoti-show $volume
+    else
+        volnoti-show -m $volume
+    fi
+}
+
+increase_volume(){
+    amixer -q set Master $increment_val%+
+    volnotify
+}
+
+decrease_volume(){
+    amixer -q set Master $increment_val%-
+    volnotify
+}
+
+toggle_mute(){
+    amixer -q set Master toggle
+    volnotify
+}
+
+if [ $1 == "--inc" ]; then
+    increase_volume
+elif [ $1 == "--dec" ]; then
+    decrease_volume
+elif [ $1 == "--toggle_mute" ]; then
+    toggle_mute
+else
+    echo "Unknown error encountered"
+fi
