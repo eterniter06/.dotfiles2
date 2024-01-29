@@ -28,12 +28,40 @@ toggle_mute(){
     volnotify
 }
 
+playnotify(){
+    status="$(playerctl status)"
+    echo $status
+
+    if [ "$status" == "Playing" ]; then
+        volnoti-show -p "/usr/share/pixmaps/volnoti/pause.svg"
+    elif [ "$status" == "Paused" ]; then
+        volnoti-show -p "/usr/share/pixmaps/volnoti/play.svg"
+    else
+        :
+    fi
+}
+
+toggle_play_pause(){
+    # Cannot toggle and then show notification
+    # playerctl status is not immediately changed
+    # Show notification and then pause
+    playnotify && playerctl play-pause
+}
+
 if [ $1 == "--inc" ]; then
     increase_volume
 elif [ $1 == "--dec" ]; then
     decrease_volume
 elif [ $1 == "--toggle_mute" ]; then
     toggle_mute
+elif [ $1 == "--play-pause" ]; then
+    toggle_play_pause
+elif [ $1 == "--next" ]; then
+    playerctl next
+    volnoti-show -p "/usr/share/pixmaps/volnoti/previous.svg"
+elif [ $1 == "--prev" ]; then
+    playerctl previous
+    volnoti-show -p "/usr/share/pixmaps/volnoti/next.svg"
 else
     echo "Unknown error encountered"
 fi

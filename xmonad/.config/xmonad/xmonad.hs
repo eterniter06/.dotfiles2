@@ -98,10 +98,10 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
 
     [ ((0, xF86XK_AudioRaiseVolume), spawn $ volumeController ++ "--inc")
     , ((0, xF86XK_AudioLowerVolume), spawn $ volumeController ++ "--dec")
-    , ((0, xF86XK_AudioPlay),    spawn "playerctl play-pause")
-    , ((0, xF86XK_AudioPause),   spawn "playerctl play-pause")
-    , ((0, xF86XK_AudioNext),    spawn "playerctl next")
-    , ((0, xF86XK_AudioPrev),    spawn "playerctl previous")
+    , ((0, xF86XK_AudioPlay),    spawn $ volumeController ++ "--play-pause")
+    , ((0, xF86XK_AudioPause),   spawn $ volumeController ++ "--play-pause")
+    , ((0, xF86XK_AudioNext),    spawn $ volumeController ++ "--next")
+    , ((0, xF86XK_AudioPrev),    spawn $ volumeController ++ "--prev")
 
     -- Volume mute
     , ((0, xF86XK_AudioMute), spawn $ volumeController ++ "--toggle_mute")
