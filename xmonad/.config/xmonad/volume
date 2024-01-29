@@ -14,38 +14,51 @@ volnotify(){
 }
 
 increase_volume(){
-    amixer -q set Master $increment_val%+
-    volnotify
+    amixer -q set Master $increment_val%+ && volnotify
 }
 
 decrease_volume(){
-    amixer -q set Master $increment_val%-
-    volnotify
+    amixer -q set Master $increment_val%- && volnotify
 }
 
 toggle_mute(){
-    amixer -q set Master toggle
-    volnotify
+    amixer -q set Master toggle && volnotify
 }
 
 playnotify(){
-    status="$(playerctl status)"
-    echo $status
+    local status="$1"
 
     if [ "$status" == "Playing" ]; then
-        volnoti-show -p "/usr/share/pixmaps/volnoti/pause.svg"
-    elif [ "$status" == "Paused" ]; then
         volnoti-show -p "/usr/share/pixmaps/volnoti/play.svg"
+    elif [ "$status" == "Paused" ]; then
+        volnoti-show -p "/usr/share/pixmaps/volnoti/pause.svg"
     else
         :
     fi
 }
 
+navigatenotify(){
+    if [ "$1" == "--next" ]; then
+        volnoti-show -p "/usr/share/pixmaps/volnoti/previous.svg"
+    elif [ "$1" == "--prev" ]; then
+        volnoti-show -p "/usr/share/pixmaps/volnoti/next.svg"
+    fi
+}
+
 toggle_play_pause(){
-    # Cannot toggle and then show notification
-    # playerctl status is not immediately changed
-    # Show notification and then pause
-    playnotify && playerctl play-pause
+    status="$(playerctl status)"
+
+    # If media is currently playing, then play_pause will pause it
+    # So show the opposite icon
+    if [ "$status" == "Playing" ]; then
+        status="Paused"
+    elif [ "$status" == "Paused" ]; then
+        status="Playing"
+    else
+        status=""
+    fi
+
+    playerctl play-pause && playnotify "$status"
 }
 
 if [ $1 == "--inc" ]; then
@@ -57,11 +70,9 @@ elif [ $1 == "--toggle_mute" ]; then
 elif [ $1 == "--play-pause" ]; then
     toggle_play_pause
 elif [ $1 == "--next" ]; then
-    playerctl next
-    volnoti-show -p "/usr/share/pixmaps/volnoti/previous.svg"
+    playerctl next && navigatenotify "$1"
 elif [ $1 == "--prev" ]; then
-    playerctl previous
-    volnoti-show -p "/usr/share/pixmaps/volnoti/next.svg"
+    playerctl previous && navigatenotify "$1"
 else
     echo "Unknown error encountered"
 fi
