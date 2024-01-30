@@ -422,7 +422,7 @@ ppLayoutPrinter "Full" = whitePP $ wrapIcon "/home/infinity/.config/xmobar/xpm/f
 ppLayoutPrinter x = whitePP "?"
 
 myPPTitle :: String -> String
-myPPTitle = xmobarRaw . (\w -> if null w then "Infinity" else w) . shorten 200
+myPPTitle = xmobarRaw . (\w -> if null w then "Infinity" else w) . shorten 70
 
 magentaPP = xmobarColor "#ff79c6" ""
 royalBluePP = xmobarColor "#52b9ff" ""
