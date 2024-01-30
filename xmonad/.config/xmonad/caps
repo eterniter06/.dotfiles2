@@ -1,0 +1,13 @@
+#!/bin/bash
+
+# Sleep to ensure the caps value is set properly before getting it
+# Fetching directly results in the value received always being "on"
+# Reason likely being that the script is called as soon as caps is pressed
+caps_status="$(sleep 0.2 && xset q | grep "Caps" | awk -F' ' '{ print $4 }')"
+VOLNOTI_IMAGE_DIR=/usr/share/pixmaps/volnoti
+
+if [ "$caps_status" == "on" ]; then
+    volnoti-show -p $VOLNOTI_IMAGE_DIR/capsLocked.svg 100
+else
+    volnoti-show -p $VOLNOTI_IMAGE_DIR/capsUnlocked.svg
+fi

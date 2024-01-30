@@ -91,6 +91,7 @@ brightnessController = "$HOME/.config/xmonad/brightness "
 volumeController = "$HOME/.config/xmonad/volume "
 
 screenshot = "killall picom; flameshot gui; picom --daemon"
+capsNotifier = "$HOME/.config/xmonad/caps "
 
 myKeys conf@(XConfig { XMonad.modMask = modm }) =
   M.fromList
@@ -122,6 +123,12 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
     , ((0, xF86XK_MonBrightnessDown),   spawn $ brightnessController ++ "-dec")
     ]
     
+    ++
+
+    -- Does not conflict with caps lock functionality (yet)
+    [ ((0, xK_Caps_Lock),    spawn capsNotifier)
+    ]
+
     ++
     
     -- Arrow keybinds: Up/Down for layout changes | Left/Right for workspace
