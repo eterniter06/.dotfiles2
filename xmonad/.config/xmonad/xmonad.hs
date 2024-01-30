@@ -381,6 +381,7 @@ myStartupHook = do
   spawnOnce "$HOME/.config/nitrogen/start-auto-nitrogen &" -- wallpaper script
   spawnOnce "easyeffects --gapplication-service"
   spawnOnce "copyq &"
+  spawnOnce "unclutter --ignore-scrolling --jitter 8 &"
   setDefaultCursor xC_left_ptr
   addScreenCorners
     [ (SCUpperRight, spawn myRofi)

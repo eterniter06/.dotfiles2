@@ -17,6 +17,7 @@ sudo pacman -S --needed --noconfirm \
     kitty \
     neovim \
     nitrogen \
+    unclutter \
     picom \
     tlp \
     rofi \
