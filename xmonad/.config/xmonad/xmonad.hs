@@ -91,7 +91,6 @@ brightnessController = "$HOME/.config/xmonad/brightness "
 volumeController = "$HOME/.config/xmonad/volume "
 
 screenshot = "killall picom; flameshot gui; picom --daemon"
-capsNotifier = "$HOME/.config/xmonad/caps "
 
 myKeys conf@(XConfig { XMonad.modMask = modm }) =
   M.fromList
@@ -125,12 +124,6 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
     
     ++
 
-    -- Does not conflict with caps lock functionality (yet)
-    [ ((0, xK_Caps_Lock),    spawn capsNotifier)
-    ]
-
-    ++
-    
     -- Arrow keybinds: Up/Down for layout changes | Left/Right for workspace
     [ ((modm, xK_Up), windows W.focusDown)
     , ((modm, xK_Down), windows W.focusUp)
@@ -383,6 +376,7 @@ toggleFadeOut w s | w `S.member` s = S.delete w s
 -- per-workspace layout choices.
 myStartupHook = do
   spawnOnce "volnoti -t 1.4 -a 0.25 -r 25" -- Volume notificaiton daemon | Responsible for the volume indication overlay
+  spawnOnce "$HOME/.config/xmonad/caps &"
   spawnOnce "picom &"
   spawnOnce "dunst &"
   spawnOnce "$HOME/.config/nitrogen/start-auto-nitrogen &" -- wallpaper script
