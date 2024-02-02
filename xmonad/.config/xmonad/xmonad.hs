@@ -15,6 +15,7 @@ import           XMonad
 import           XMonad.Actions.CycleWS
 import           XMonad.Actions.GridSelect
 import           XMonad.Actions.SpawnOn
+import           XMonad.Actions.Warp
 
 import           XMonad.Hooks.EwmhDesktops
 import           XMonad.Hooks.DynamicLog
@@ -248,6 +249,9 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0 ..]
        , (f  , m ) <- [(W.view, 0), (W.shift, shiftMask)]
        ]
+
+    ++
+       [ ((modm, xK_a), nextScreen >> warpToWindow(0.9) (0.2)) ]
 
 
 ------------------------------------------------------------------------
