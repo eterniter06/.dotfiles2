@@ -329,13 +329,15 @@ myLayout =
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-myManageHook = insertPosition End Newer <+> composeAll
-  [ className =? "MPlayer" --> doFloat
-  , className =? "Onboard" --> doFloat
-  , stringProperty "WM_WINDOW_ROLE" =? "GtkFileChooserDialog" --> doCenterFloat
-  , resource =? "desktop_window" --> doIgnore
-  , resource =? "kdesktop" --> doIgnore
-  , manageDocks
+myManageHook = composeOne
+  [ checkDock              -?> doIgnore
+  , className =? "MPlayer" -?> doFloat
+  , className =? "Onboard" -?> doFloat
+  , isDialog               -?> doCenterFloat
+  , stringProperty "WM_WINDOW_ROLE" =? "GtkFileChooserDialog" -?> doCenterFloat
+  , resource =? "desktop_window" -?> doIgnore
+  , resource =? "kdesktop" -?> doIgnore
+  , return True -?> doF W.swapDown
   ]
 
 ------------------------------------------------------------------------
