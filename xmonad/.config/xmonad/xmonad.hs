@@ -288,10 +288,11 @@ mySpacing = spacingRaw True (Border 0 10 10 10) True (Border 10 10 10 10) True
 -- Use at the beginning of myLayout to use spacing between windows
 -- myFocusedBorderColor = "#ffffff"
 
+-- smartBorders is only for single monitor
 myLayout =
     screenCornerLayoutHook
+    $   lessBorders Screen
     $   avoidStruts
-    $   smartBorders
     $   tiled
     ||| Mirror tiled
     ||| Grid
@@ -396,7 +397,8 @@ myStartupHook = do
 myXMobarPP = def
   { ppLayout = ppLayoutPrinter
   , ppCurrent = royalBluePP . discardSecondString wsIconFull
-  , ppHidden = whitePP . discardSecondString wsIconFull
+  , ppVisible = purplePP . discardSecondString wsIconFull
+  , ppHidden = lowWhitePP . discardSecondString wsIconFull
   , ppHiddenNoWindows = lowWhitePP . discardSecondString wsIconEmpty 
   , ppTitle = myPPTitle
 
@@ -417,10 +419,10 @@ wrapIcon :: String -> String
 wrapIcon absoluteIconDirectory = wrap "    <icon=" "/>      " absoluteIconDirectory
 
 ppLayoutPrinter :: String -> String
-ppLayoutPrinter "Tall" = bluePP $ wrapIcon "/home/infinity/.config/xmobar/xpm/tall_selected.xpm"
-ppLayoutPrinter "Mirror Tall" = magentaPP $ wrapIcon "/home/infinity/.config/xmobar/xpm/mirrored_tall_selected.xpm"
-ppLayoutPrinter "Grid" = purplePP $ wrapIcon "/home/infinity/.config/xmobar/xpm/grid_selected.xpm"
-ppLayoutPrinter "Full" = whitePP $ wrapIcon "/home/infinity/.config/xmobar/xpm/full_selected.xpm"
+ppLayoutPrinter "Tall" = wrapIcon "/home/infinity/.config/xmobar/xpm/tall_selected.xpm"
+ppLayoutPrinter "Mirror Tall" = wrapIcon "/home/infinity/.config/xmobar/xpm/mirrored_tall_selected.xpm"
+ppLayoutPrinter "Grid" = wrapIcon "/home/infinity/.config/xmobar/xpm/grid_selected.xpm"
+ppLayoutPrinter "Full" = wrapIcon "/home/infinity/.config/xmobar/xpm/full_selected.xpm"
 ppLayoutPrinter x = whitePP "?"
 
 myPPTitle :: String -> String
