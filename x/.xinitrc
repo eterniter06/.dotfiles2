@@ -1,5 +1,5 @@
 xrandr --setprovideroutputsource modsetting NVIDIA-0
-xrandr --auto
+autorandr --change
 xrdb -merge ~/.Xresources
 
 xset r rate 250 40
