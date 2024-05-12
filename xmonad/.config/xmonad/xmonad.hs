@@ -85,7 +85,7 @@ leftAlt = mod1Mask
 rightAlt = mod3Mask
 winKey = mod4Mask
 
-myRofi = "rofi -show drun -theme /$HOME/.config/rofi/launchers/type-3/style-2.rasi"
+myRofi = "rofi -show drun -theme /$HOME/.config/rofi/launchers/type-3/selected.rasi"
 myRofiBluetooth = "rofi-bluetooth -theme /$HOME/.config/rofi/launchers/type-7/style-4.rasi"
 
 brightnessController = "$HOME/.config/xmonad/brightness "
@@ -97,35 +97,36 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
   M.fromList
     $
 
+    -- Media keybinds
     [ ((0, xF86XK_AudioRaiseVolume), spawn $ volumeController ++ "--inc")
     , ((0, xF86XK_AudioLowerVolume), spawn $ volumeController ++ "--dec")
-    , ((0, xF86XK_AudioPlay),    spawn $ volumeController ++ "--play-pause")
-    , ((0, xF86XK_AudioPause),   spawn $ volumeController ++ "--play-pause")
-    , ((0, xF86XK_AudioNext),    spawn $ volumeController ++ "--next")
-    , ((0, xF86XK_AudioPrev),    spawn $ volumeController ++ "--prev")
 
-    -- Volume mute
+
+    , ((0, xF86XK_AudioMicMute), spawn $ volumeController ++ "--toggle_mic_mute")
+
     , ((0, xF86XK_AudioMute), spawn $ volumeController ++ "--toggle_mute")
 
-    -- Media play/pause
-    , ((modm, xF86XK_AudioMute), spawn "playerctl play-pause")
+    , ((0, xF86XK_AudioPlay),    spawn $ volumeController ++ "--play-pause")
+    , ((0, xF86XK_AudioPause),   spawn $ volumeController ++ "--play-pause")
+    , ((modm, xF86XK_AudioMute), spawn $ volumeController ++ "--play-pause")
 
-    -- Media Next
-    , ((modm, xF86XK_AudioRaiseVolume), spawn "playerctl next")
+    , ((0, xF86XK_AudioNext),           spawn $ volumeController ++ "--next")
+    , ((modm, xF86XK_AudioRaiseVolume), spawn $ volumeController ++ "--next")
 
-    -- Media Previous
-    , ((modm, xF86XK_AudioLowerVolume), spawn "playerctl previous")
+    , ((0, xF86XK_AudioPrev),           spawn $ volumeController ++ "--prev")
+    , ((modm, xF86XK_AudioLowerVolume), spawn $ volumeController ++ "--prev")
     ]
 
     ++
 
+    -- Brightness keybinds
     [ ((0, xF86XK_MonBrightnessUp),     spawn $ brightnessController ++ "-inc")
     , ((0, xF86XK_MonBrightnessDown),   spawn $ brightnessController ++ "-dec")
     ]
     
     ++
 
-    -- Arrow keybinds: Up/Down for layout changes | Left/Right for workspace
+    -- Workspace keybinds
     [ ((modm, xK_Up), windows W.focusDown)
     , ((modm, xK_Down), windows W.focusUp)
     , ((modm, xK_Left), prevWS)
@@ -156,15 +157,29 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
 
     ++
 
-    -- take (selective) screenshots
+    -- Screenshot keybinds
     [ ((modm, xK_s), spawn screenshot)
     , ((0, xK_Print), spawn screenshot)
     ]
 
     ++
 
+    -- Rotate laptop screen
+    -- Use xrandr to figure out the default display
+    [
+      ((modm, xK_f), spawn "xrandr --output eDP1 --rotate left") 
+    , ((modm, xK_g), spawn "xrandr --output eDP1 --rotate right") 
+
+    , ((modm .|. shiftMask, xK_f), spawn "xrandr --output eDP1 --rotate normal")
+    , ((modm .|. shiftMask, xK_g), spawn "xrandr --output eDP1 --rotate normal")
+    ]
+
+    ++
+
+    -- (Mostly) default keybinds 
+    [
     -- launch default terminal
-    [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
+    ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch alacritty
     , ((modm .|. shiftMask, xK_Tab), spawn "alacritty")

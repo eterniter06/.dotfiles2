@@ -25,6 +25,14 @@ toggle_mute(){
     amixer -q set Master toggle && volnotify
 }
 
+navigatenotify(){
+    if [ "$1" == "--next" ]; then
+        volnoti-show -p "/usr/share/pixmaps/volnoti/previous.svg"
+    elif [ "$1" == "--prev" ]; then
+        volnoti-show -p "/usr/share/pixmaps/volnoti/next.svg"
+    fi
+}
+
 playnotify(){
     local status="$1"
 
@@ -34,14 +42,6 @@ playnotify(){
         volnoti-show -p "/usr/share/pixmaps/volnoti/pause.svg"
     else
         :
-    fi
-}
-
-navigatenotify(){
-    if [ "$1" == "--next" ]; then
-        volnoti-show -p "/usr/share/pixmaps/volnoti/previous.svg"
-    elif [ "$1" == "--prev" ]; then
-        volnoti-show -p "/usr/share/pixmaps/volnoti/next.svg"
     fi
 }
 
@@ -61,18 +61,46 @@ toggle_play_pause(){
     playerctl play-pause && playnotify "$status"
 }
 
-if [ $1 == "--inc" ]; then
+toggle_mic(){
+    ## Based on https://askubuntu.com/a/1291627
+    
+    # Get active audio source index
+    CURRENT_SOURCE=$(pactl info | grep "Default Source" | cut -f3 -d" ")
+
+    # List lines in pactl after the source name match and pick mute status
+    status=$(pactl list sources | grep -A 10 $CURRENT_SOURCE)
+
+    # requires GNU grep
+    muted=$(echo "$status" | grep -oP '(?<=Mute:\s)\w+')
+    echo "$muted"
+
+    mic_volume=($(echo "$status" | grep -Eo 1?[0-9][0-9]%))
+    echo ${mic_volume[0]}
+
+    if [ "$muted" == "no" ] ; then
+        amixer set Capture nocap && 
+        volnoti-show -p "/usr/share/pixmaps/volnoti/mic_muted.svg" $mic_volume
+    else
+        amixer set Capture cap &&
+        volnoti-show -p "/usr/share/pixmaps/volnoti/mic_on.svg" $mic_volume
+    fi
+
+}
+
+if [ "$1" == "--inc" ]; then
     increase_volume
-elif [ $1 == "--dec" ]; then
+elif [ "$1" == "--dec" ]; then
     decrease_volume
-elif [ $1 == "--toggle_mute" ]; then
+elif [ "$1" == "--toggle_mute" ]; then
     toggle_mute
-elif [ $1 == "--play-pause" ]; then
+elif [ "$1" == "--play-pause" ]; then
     toggle_play_pause
-elif [ $1 == "--next" ]; then
+elif [ "$1" == "--next" ]; then
     playerctl next && navigatenotify "$1"
-elif [ $1 == "--prev" ]; then
+elif [ "$1" == "--prev" ]; then
     playerctl previous && navigatenotify "$1"
+elif [ "$1" == "--toggle_mic_mute" ]; then
+    toggle_mic
 else
     echo "Unknown error encountered"
 fi
