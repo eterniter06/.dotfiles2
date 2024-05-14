@@ -27,9 +27,9 @@ toggle_mute(){
 
 navigatenotify(){
     if [ "$1" == "--next" ]; then
-        volnoti-show -p "/usr/share/pixmaps/volnoti/previous.svg"
+        volnoti-show -p "/usr/share/pixmaps/volnoti/previous.svg" 101
     elif [ "$1" == "--prev" ]; then
-        volnoti-show -p "/usr/share/pixmaps/volnoti/next.svg"
+        volnoti-show -p "/usr/share/pixmaps/volnoti/next.svg" 101
     fi
 }
 
@@ -37,9 +37,9 @@ playnotify(){
     local status="$1"
 
     if [ "$status" == "Playing" ]; then
-        volnoti-show -p "/usr/share/pixmaps/volnoti/play.svg"
+        volnoti-show -p "/usr/share/pixmaps/volnoti/play.svg" 101
     elif [ "$status" == "Paused" ]; then
-        volnoti-show -p "/usr/share/pixmaps/volnoti/pause.svg"
+        volnoti-show -p "/usr/share/pixmaps/volnoti/pause.svg" 101
     else
         :
     fi
