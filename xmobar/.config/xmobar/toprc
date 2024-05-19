@@ -43,7 +43,6 @@ Config {
                             [
                                    "--template", "<fn=1></fn>  <usedratio>%"
                             ] 10
-                        , Run Date "<fc=#52b9ff>%a %_d   <fn=1></fn>  %H:%M:%S</fc>" "date" 5
                         , Run Battery
                             [
                             "--template" , "<acstatus>"
@@ -83,11 +82,12 @@ Config {
                               , "--"
                                   , "-D", "intel_backlight"
                             ] 5
+                        , Run Com "bash" ["-c", "updates=$(timeout 20s checkupdates | wc -l); if [ $updates -eq 0 ]; then uname -r; else echo $updates; fi"] "checkupdates" 6000
                     ]
        , sepChar = "%"
        , alignSep = "}{"
        , template = "%cpu% | %memory% | %dynnetwork%}\
-                    \%date%\
+                    \%checkupdates%\
                     \{%bright% | %VEBS% | %battery% "
        }
 -- Bagdogra is ??

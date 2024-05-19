@@ -17,10 +17,10 @@ Config {
        , allDesktops = True
        , overrideRedirect = True
        , commands = [ Run UnsafeXMonadLog
-                      , Run Com "bash" ["-c", "updates=$(checkupdates | wc -l); if [ $updates -eq 0 ]; then uname -r; else echo $updates; fi"] "checkupdates" 6000
                       , Run Com "bash" ["-c", "rofi-bluetooth --status"] "bt" 1
+                      , Run Date "<fc=#52b9ff>%a %_d   <fn=1></fn>  %H:%M:%S</fc>" "date" 5
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%UnsafeXMonadLog%}   %checkupdates%   {<action=`xdotool key super+shift+z`>%bt%</action>    "
+       , template = "%UnsafeXMonadLog%}   %date%   {<action=`xdotool key super+shift+z`>%bt%</action>    "
        }
