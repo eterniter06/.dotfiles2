@@ -1,0 +1,19 @@
+directory: ~/jellyfin/media/Music
+
+library: ~/.config/beets/MusicDataLibrary.db
+
+import:
+    move: yes
+
+ui:
+    color: yes
+    text_success: green
+    text_warrning: yellow
+    text_error: red
+    text_highlight: blue
+    text_highlight_minor: lightgray
+    action_default: turquoise
+    action: fuchsia
+
+plugins:
+    fromfilename

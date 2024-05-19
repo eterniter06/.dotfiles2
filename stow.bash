@@ -10,6 +10,7 @@
 stow \
     alacritty \
     bash \
+    beets \
     fonts \
     git \
     kitty \
