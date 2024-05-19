@@ -10,9 +10,9 @@ update_caps(){
 
 show_indicator(){
     if [ "$1" == "on" ]; then
-        volnoti-show -p $VOLNOTI_IMAGE_DIR/capsLocked.svg 100
+        volnoti-show -p "$VOLNOTI_IMAGE_DIR/capsLocked.svg" 101
     else
-        volnoti-show -p $VOLNOTI_IMAGE_DIR/capsUnlocked.svg
+        volnoti-show -p "$VOLNOTI_IMAGE_DIR/capsUnlocked.svg" 101
     fi
 }
 

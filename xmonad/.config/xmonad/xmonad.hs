@@ -242,6 +242,7 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
     , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
     -- Quit xmonad
+    -- Kill capsLock, autoNitrogen and other(if any) daemon scrips
     , ((modm .|. shiftMask, xK_q), io (exitWith ExitSuccess))
 
     -- Restart xmonad
@@ -455,7 +456,7 @@ ppLayoutPrinter "Full" = wrapIcon "/home/infinity/.config/xmobar/xpm/full_select
 ppLayoutPrinter x = whitePP "?"
 
 myPPTitle :: String -> String
-myPPTitle = xmobarRaw . (\w -> if null w then "Infinity" else w) . shorten 70
+myPPTitle = xmobarRaw . (\w -> if null w then "Infinity" else w) . shorten 40
 
 magentaPP = xmobarColor "#ff79c6" ""
 royalBluePP = xmobarColor "#52b9ff" ""
