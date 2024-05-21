@@ -62,10 +62,24 @@ if [ "$color_prompt" = yes ]; then
     boldGreen="\[\033[01;32m\]"
     boldRed="\[\033[01;31m\]"
 
+    if [ -n "$SSH_CLIENT" ] || [ -n "$SSH_TTY" ]; then
+        host="${boldGreen}\h${normal}${purple}@${normal}"
+    fi
+
+    source /usr/share/git/git-prompt.sh
+
     lastCommandStatus="if [ \$? = 0 ]; then echo \"${boldGreen}\"; else echo \"${boldRed}\"; fi"
 
-    PS1="${debian_chroot:+($debian_chroot)}${boldGreen}\u${boldNormal}${purple}@\`${lastCommandStatus}\`\h${normal}:${purple}\w${normal}\$ "
+    GIT_PS1_SHOWCOLORHINTS="true"
+    GIT_PS1_HIDE_IF_PWD_IGNORED="true"
+    GIT_PS1_SHOWCONFLICTSTATE="true"
+    GIT_PS1_SHOWDIRTYSTATE="true"
+    GIT_PS1_SHOWSTASHSTATE="true"
+    GIT_PS1_SHOWUNTRACKEDFILES="true"
 
+    PS1="${debian_chroot:+($debian_chroot)}${host}\`${lastCommandStatus}\`\u${normal}: ${purple}\w${normal}\$(__git_ps1 \" (%s)\")\n${normal}\$ "
+
+    unset host
     unset normal
     unset purple
     unset boldGreen
