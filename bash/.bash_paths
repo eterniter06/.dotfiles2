@@ -1,5 +1,4 @@
-export PATH="$HOME/.local/bin:$PATH"
 export PATH="$PATH:/home/infinity/Flutter/bin"
-export PATH="$PATH:/home/infinity/fvm"
+export PATH="/home/infinity/.local/bin:$PATH"
 
 export JAVA_HOME="$HOME/Android/android-studio/jbr"
