@@ -101,20 +101,14 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
     [ ((0, xF86XK_AudioRaiseVolume), spawn $ volumeController ++ "--inc")
     , ((0, xF86XK_AudioLowerVolume), spawn $ volumeController ++ "--dec")
 
-
     , ((0, xF86XK_AudioMicMute), spawn $ volumeController ++ "--toggle_mic_mute")
-
     , ((0, xF86XK_AudioMute), spawn $ volumeController ++ "--toggle_mute")
 
     , ((0, xF86XK_AudioPlay),    spawn $ volumeController ++ "--play-pause")
     , ((0, xF86XK_AudioPause),   spawn $ volumeController ++ "--play-pause")
-    , ((modm, xF86XK_AudioMute), spawn $ volumeController ++ "--play-pause")
 
     , ((0, xF86XK_AudioNext),           spawn $ volumeController ++ "--next")
-    , ((modm, xF86XK_AudioRaiseVolume), spawn $ volumeController ++ "--next")
-
     , ((0, xF86XK_AudioPrev),           spawn $ volumeController ++ "--prev")
-    , ((modm, xF86XK_AudioLowerVolume), spawn $ volumeController ++ "--prev")
     ]
 
     ++
@@ -172,6 +166,12 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
 
     , ((modm .|. shiftMask, xK_f), spawn "xrandr --output eDP1 --rotate normal")
     , ((modm .|. shiftMask, xK_g), spawn "xrandr --output eDP1 --rotate normal")
+    ]
+
+    ++
+
+    [
+      ((modm, xK_v), spawn "copyq menu") 
     ]
 
     ++
@@ -241,9 +241,12 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
     --
     , ((modm              , xK_b     ), sendMessage ToggleStruts)
 
-    -- Quit xmonad
-    -- Kill capsLock, autoNitrogen and other(if any) daemon scrips
-    , ((modm .|. shiftMask, xK_q), io (exitWith ExitSuccess))
+    -- Quit xmonad and kill any daemon scripts
+    , ((modm .|. shiftMask, xK_q),
+            spawn "killall caps auto-nitrogen" >>
+            spawn "killall xmobar -9" >>
+            io (exitWith ExitSuccess)
+      )
 
     -- Restart xmonad
     , ((modm, xK_q), spawn "xmonad --recompile; xmonad --restart")
