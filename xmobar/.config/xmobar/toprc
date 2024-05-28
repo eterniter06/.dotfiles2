@@ -18,15 +18,10 @@ Config {
        , allDesktops = True
        , overrideRedirect = True
        , commands = [
-                        Run Weather "VEBS" 
+                        Run Wireless ""
                             [
-                                  "-t"      , "<skyCondition>: <tempC>°C"
-                                , "-L"      , "18"
-                                , "-H"      , "25"
-                                , "--low"   , "lightblue"
-                                , "--normal", "green"
-                                , "--high"  , "#ce7aff"
-                            ] 18000
+                                  "--template", "<ssid>"
+                            ] 10
                         , Run DynNetwork
                             [
                                   "--template", "<fc=#52b9ff><fn=1>\xf019</fn>  <rx>Kb</fc>  <fc=#ce7aff><fn=1>\xf093</fn>  <tx>Kb</fc>"
@@ -34,42 +29,44 @@ Config {
                         , Run Cpu 
                             [
                                   "--template", "<fn=1></fn>  <total>%"
-                                ,  "-L"       , "0"
+                                ,  "-L"       , "10"
                                 ,  "-H"       , "70"
+                                ,  "-p"       , "3"
                                 ,  "--normal" , "#52b9ff"
                                 ,  "--high"   , "#ce7aff"
                             ] 10
                         , Run Memory
                             [
                                    "--template", "<fn=1></fn>  <usedratio>%"
+                                ,  "-p"       , "3"
                             ] 10
                         , Run Battery
                             [
                             "--template" , "<acstatus>"
                             , "--Low"      , "20"        -- units: %
                             , "--High"     , "70"        -- units: %
+                            ,  "-p"        , "3"
                             , "--low"      , "#CE7AFF"
                             , "--normal"   , "#52b9ff"
                             , "--high"     , "#52b9ff"
                             , "--" -- battery specific options
-                                       -- discharging status - use icons
-                                       -- Possible charging animation
-                                       , "-f"   ,  "<fn=1>\xf244\xf243\xf243\xf243\xf242\xf242\xf242\xf241\xf241\xf240</fn>"
                                        , "-l"   ,  "#CE7AFF"
                                        , "-m"   ,  "#0071BC"
                                        , "-h"   ,  "#52b9ff"
                                        , "-o"   , ""
-                                       , "--lows"     , "<fn=1></fn>: <left>% <timeleft>"
-                                       , "--mediums"  , "<fn=1></fn>: <left>% <timeleft>"
-                                       , "--highs"    , "<fn=1></fn>: <left>% <timeleft>"
+                                       , "--lows"     , "<fn=1></fn> <left>%"
+                                       , "--mediums"  , "<fn=1></fn> <left>%"
+                                       , "--highs"    , "<fn=1></fn> <left>%"
 
                                        -- AC "on" status
-                                       , "-O"  , "<fn=1></fn>: <left>% <timeleft>"
+                                       , "-O"  , "<fn=1></fn>: <left>%"
 
                                        -- charged status
                                        , "-i"  , "<fn=1></fn>"
--- Annoying at times
---                                       , "-a", "notify-send -u critical 'Battery running out!!'"
+
+                                       -- Annoying at times
+                                       --, "-a", "notify-send -u critical 'Battery running out!!'"
+
                                        , "-A", "20"
                              ] 50
                         , Run Brightness
@@ -77,6 +74,7 @@ Config {
                                 "--template", "<fn=0>☼</fn> <percent>%"
                               ,"-L", "31"
                               ,"-l", "#52b9ff"
+                              ,"-p", "3"
                               ,"-H", "59"
                               ,"-h", "#CE7AFF"
                               , "--"
@@ -86,12 +84,10 @@ Config {
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%cpu% | %memory% | %dynnetwork%}\
+       , template = "%cpu%｜%memory%｜%wi% %dynnetwork%}\
                     \%checkupdates%\
-                    \{%bright% | %VEBS% | %battery% "
+                    \{%bright%｜%battery% "
        }
--- Bagdogra is ??
--- Bhubaneswar is VEBS
--- Add uptime since start of battery discharge
+
 -- Fix wifi/internet status
 -- Fix Battery colour indicator

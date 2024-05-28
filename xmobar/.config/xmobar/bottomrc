@@ -17,7 +17,7 @@ Config {
        , allDesktops = True
        , overrideRedirect = True
        , commands = [ Run UnsafeXMonadLog
-                      , Run Com "bash" ["-c", "rofi-bluetooth --status"] "bt" 1
+                      , Run Com "bash" ["-c", "rofi-bluetooth --status --low=#CE7AFF --med=#ffffff --high=#52b9ff --full=#000000"] "bt" 1
                       , Run Date "<fc=#52b9ff>%a %_d   <fn=1></fn>  %H:%M:%S</fc>" "date" 5
                     ]
        , sepChar = "%"
