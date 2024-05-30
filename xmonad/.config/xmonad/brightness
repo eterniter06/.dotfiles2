@@ -9,13 +9,13 @@ get_brightness(){
 }
 
 format_brightness(){
-    brightness=$(printf "%.2f" $brightness)
+    brightness=$(printf "%.2f" "$brightness")
 }
 
 increase_brightness(){
     get_brightness
 
-    case $brightness in
+    case "$brightness" in
         95.00) xbacklight -set 96;;
         96.00) xbacklight -set 97;;
         97.00) xbacklight -set 98;;
@@ -24,7 +24,7 @@ increase_brightness(){
         100.00) ;;
 
         *)  increment_by_5
-            xbacklight -set $brightness;;
+            xbacklight -set "$brightness";;
     esac
 }
 
@@ -35,7 +35,7 @@ increment_by_5(){
 
 decrease_brightness(){
     get_brightness
-    echo $brightness
+    echo "$brightness"
 
     case $brightness in
         5.00) xbacklight -set 4;;
@@ -48,7 +48,7 @@ decrease_brightness(){
         0) ;;
 
         *) decrement_by_5
-           xbacklight -set $brightness;;
+           xbacklight -set "$brightness";;
     esac
 }
 
@@ -57,12 +57,12 @@ decrement_by_5(){
     brightness=$(echo "print(5 * round($brightness / 5))" | python3)
 }
 
-if [ $1 == "-inc" ]; then
+if [ "$1" == "-inc" ]; then
     increase_brightness
-    volnoti-show -b $brightness
-elif [ $1 == "-dec" ]; then
+    volnoti-show -b "$brightness"
+elif [ "$1" == "-dec" ]; then
     decrease_brightness
-    volnoti-show -b $brightness
+    volnoti-show -b "$brightness"
 else
     echo "Unknown error encountered"
 fi

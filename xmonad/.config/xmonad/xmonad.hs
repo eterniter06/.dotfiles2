@@ -92,6 +92,7 @@ brightnessController = "$HOME/.config/xmonad/brightness "
 volumeController = "$HOME/.config/xmonad/volume "
 
 screenshot = "killall picom; flameshot gui; picom --daemon"
+fullScreenshot = "killall picom; flameshot screen; picom --daemon"
 
 myKeys conf@(XConfig { XMonad.modMask = modm }) =
   M.fromList
@@ -101,8 +102,8 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
     [ ((0, xF86XK_AudioRaiseVolume), spawn $ volumeController ++ "--inc")
     , ((0, xF86XK_AudioLowerVolume), spawn $ volumeController ++ "--dec")
 
-    , ((0, xF86XK_AudioMicMute), spawn $ volumeController ++ "--toggle_mic_mute")
-    , ((0, xF86XK_AudioMute), spawn $ volumeController ++ "--toggle_mute")
+    , ((0, xF86XK_AudioMicMute), spawn $ volumeController ++ "--toggle-mic-mute")
+    , ((0, xF86XK_AudioMute), spawn $ volumeController ++ "--toggle-mute")
 
     , ((0, xF86XK_AudioPlay),    spawn $ volumeController ++ "--play-pause")
     , ((0, xF86XK_AudioPause),   spawn $ volumeController ++ "--play-pause")
@@ -153,7 +154,7 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
 
     -- Screenshot keybinds
     [ ((modm, xK_s), spawn screenshot)
-    , ((0, xK_Print), spawn screenshot)
+    , ((0, xK_Print), spawn fullScreenshot)
     ]
 
     ++

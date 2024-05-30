@@ -7,9 +7,9 @@ volnotify(){
     volume=$(awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master))
 
     if [ "$toggle_status" == "on" ];then
-        volnoti-show $volume
+        volnoti-show "$volume"
     else
-        volnoti-show -m $volume
+        volnoti-show -m "$volume"
     fi
 }
 
@@ -65,24 +65,23 @@ toggle_mic(){
     ## Based on https://askubuntu.com/a/1291627
     
     # Get active audio source index
-    CURRENT_SOURCE=$(pactl info | grep "Default Source" | cut -f3 -d" ")
+    CURRENT_SOURCE=$(pactl info | grep "Default Source" | cut -f3 -d " ")
 
     # List lines in pactl after the source name match and pick mute status
-    status=$(pactl list sources | grep -A 10 $CURRENT_SOURCE)
+    status=$(pactl list sources | grep -A 10 "$CURRENT_SOURCE")
 
     # requires GNU grep
     muted=$(echo "$status" | grep -oP '(?<=Mute:\s)\w+')
-    echo "$muted"
 
-    mic_volume=($(echo "$status" | grep -Eo 1?[0-9][0-9]%))
-    echo ${mic_volume[0]}
+    mapfile -t mic_volumes < <(echo "$status" | grep -oE '1?[0-9][0-9]%')
+    mic_volume="${mic_volumes[0]}"
 
     if [ "$muted" == "no" ] ; then
-        amixer set Capture nocap && 
-        volnoti-show -p "/usr/share/pixmaps/volnoti/mic_muted.svg" $mic_volume
+        amixer set Capture nocap -q && 
+        volnoti-show -p "/usr/share/pixmaps/volnoti/mic_muted.svg" "$mic_volume"
     else
-        amixer set Capture cap &&
-        volnoti-show -p "/usr/share/pixmaps/volnoti/mic_on.svg" $mic_volume
+        amixer set Capture cap -q &&
+        volnoti-show -p "/usr/share/pixmaps/volnoti/mic_on.svg" "$mic_volume"
     fi
 
 }
@@ -91,7 +90,7 @@ if [ "$1" == "--inc" ]; then
     increase_volume
 elif [ "$1" == "--dec" ]; then
     decrease_volume
-elif [ "$1" == "--toggle_mute" ]; then
+elif [ "$1" == "--toggle-mute" ]; then
     toggle_mute
 elif [ "$1" == "--play-pause" ]; then
     toggle_play_pause
@@ -99,8 +98,10 @@ elif [ "$1" == "--next" ]; then
     playerctl next && navigatenotify "$1"
 elif [ "$1" == "--prev" ]; then
     playerctl previous && navigatenotify "$1"
-elif [ "$1" == "--toggle_mic_mute" ]; then
+elif [ "$1" == "--toggle-mic-mute" ]; then
     toggle_mic
+elif [ "$#" -ne 1 ]; then
+    echo "script expects at least a single argument"
 else
-    echo "Unknown error encountered"
+    echo "Unknown error"
 fi
