@@ -55,26 +55,8 @@ import qualified XMonad.StackSet               as W
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 myWorkspaces = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
 
-xmobarEscape = concatMap doubleLts
- where
-  doubleLts '<' = "<<"
-  doubleLts x   = [x]
-
-myClickableWorkspaces :: [String]
-myClickableWorkspaces = clickable . (map xmobarEscape) $ myWorkspaces
- where
-  clickable l =
-    [ "<action=xdotool key super+" ++ show (n) ++ ">" ++ ws ++ "</action>"
-    | (i, ws) <- zip [0 .. len] l
-    , let n = i
-    ]
-  len = length myWorkspaces
-
--- my2MonitorClickableWorkspaces = withScreens 2 myClickableWorkspaces
-
 -- Border colors
-borderBlue, borderWhite, borderBlack :: String
-borderBlue = "#008bdb"
+borderWhite, borderBlack:: String
 borderWhite = "#ffffff"
 borderBlack = "#000000"
 
@@ -86,6 +68,7 @@ rightAlt = mod3Mask
 winKey = mod4Mask
 
 myRofi = "rofi -show drun -theme /$HOME/.config/rofi/launchers/type-3/selected.rasi"
+myRofiWindow = "rofi -show windowcd -theme /$HOME/.config/rofi/launchers/type-1/selected.rasi"
 myRofiBluetooth = "rofi-bluetooth -theme /$HOME/.config/rofi/launchers/type-7/style-4.rasi"
 
 brightnessController = "$HOME/.config/xmonad/brightness "
@@ -122,8 +105,8 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
     ++
 
     -- Workspace keybinds
-    [ ((modm, xK_Up), windows W.focusDown)
-    , ((modm, xK_Down), windows W.focusUp)
+    [ ((modm, xK_Up), windows W.focusUp)
+    , ((modm, xK_Down), windows W.focusDown)
     , ((modm, xK_Left), prevWS)
     , ((modm, xK_Right), nextWS)
 
@@ -146,6 +129,7 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
     -- Rofi Menu keybinds
     [ ((modm, xK_z), spawn myRofi)
     , ((modm, xK_p), spawn myRofi)
+    , ((modm, xK_bracketleft), spawn myRofiWindow)
     , ((modm .|. shiftMask, xK_z), spawn myRofiBluetooth)
     , ((modm .|. shiftMask, xK_p), spawn myRofiBluetooth)
     ]
@@ -325,22 +309,24 @@ myLayout =
     screenCornerLayoutHook
     $   lessBorders Screen
     $   avoidStruts
-    $   tiled
-    ||| Mirror tiled
+    $   mTiled
+    ||| tiled
     ||| Grid
     ||| Full
  where
      -- default tiling algorithm partitions the screen into two panes
   tiled   = Tall nmaster delta ratio
+  mTiled  = Mirror $ Tall nmaster delta mratio
 
   -- The default number of windows in the master pane
   nmaster = 1
 
   -- Default proportion of screen occupied by master pane
-  ratio   = 67 / 100
+  ratio   = 50 / 100
+  mratio  = 70 / 100
 
   -- Percent of screen to increment by when resizing panes
-  delta   = 3 / 1000
+  delta   = 5 / 1000
 
 ------------------------------------------------------------------------
 -- Window rules:
@@ -489,7 +475,7 @@ defaults = def {
                , clickJustFocuses   = False
                , borderWidth        = 2
                , modMask            = winKey
-               , workspaces         = myClickableWorkspaces
+               , workspaces         = myWorkspaces
                , normalBorderColor  = borderBlack
                , focusedBorderColor = borderWhite
 
