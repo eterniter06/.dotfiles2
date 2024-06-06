@@ -18,13 +18,13 @@ Config {
        , allDesktops = True
        , overrideRedirect = True
        , commands = [
-                        Run Wireless ""
-                            [
-                                  "--template", "<ssid>"
-                            ] 10
-                        , Run DynNetwork
+                          Run DynNetwork
                             [
                                   "--template", "<fc=#52b9ff><fn=1>\xf019</fn>  <rx>Kb</fc>  <fc=#ce7aff><fn=1>\xf093</fn>  <tx>Kb</fc>"
+                            ] 10
+                        , Run Wireless ""
+                            [
+                                  "--template", "<ssid>"
                             ] 10
                         , Run Cpu 
                             [
@@ -80,11 +80,11 @@ Config {
                               , "--"
                                   , "-D", "intel_backlight"
                             ] 5
-                        , Run Com "bash" ["-c", "updates=$(timeout 20s checkupdates | wc -l); if [ $updates -eq 0 ]; then uname -r; else echo $updates; fi"] "checkupdates" 6000
+                        , Run Com "bash" ["-c", "./.config/xmobar/xmobar_package_counter"] "checkupdates" 18000
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%cpu%｜%memory%｜%wi% %dynnetwork%}\
+       , template = "%cpu%｜%memory%｜%dynnetwork%｜%wi% }\
                     \%checkupdates%\
                     \{%bright%｜%battery% "
        }
