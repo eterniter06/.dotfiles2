@@ -5,5 +5,7 @@
 [[ -f ~/.bashrc ]] && . ~/.bashrc
 
 export XCURSOR_PATH=${XCURSOR_PATH}:~/.local/share/icons
-[[ -z $DISPLAY && $XDG_VTNR -eq 1 ]] && startx
-
+if [[ -z $DISPLAY ]] ; then
+    [[ $XDG_VTNR -eq 1 ]] && startx
+    [[ $XDG_VTNR -eq 2 ]] && dbus-run-session startplasma-wayland
+fi
