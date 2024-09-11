@@ -12,6 +12,7 @@ stow \
     bash \
     beets \
     fonts \
+    fusuma \
     git \
     kitty \
     nitrogen \
