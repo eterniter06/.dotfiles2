@@ -167,7 +167,7 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
     ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
 
     -- launch alacritty
-    , ((modm .|. shiftMask, xK_Tab), spawn "alacritty")
+    , ((modm .|. shiftMask, xK_Tab), spawn $ "alacritty" ++ " | " ++ XMonad.terminal conf)
 
     -- Lock Screen
     , ((modm .|. shiftMask, xK_l), spawn "slock")
@@ -315,18 +315,14 @@ myLayout =
     ||| Full
  where
      -- default tiling algorithm partitions the screen into two panes
-  tiled   = Tall nmaster delta ratio
-  mTiled  = Mirror $ Tall nmaster delta mratio
+  tiled   = Tall masterPaneWindowCount resizePercent ratio
+  mTiled  = Mirror $ Tall masterPaneWindowCount resizePercent mratio
 
-  -- The default number of windows in the master pane
-  nmaster = 1
-
+  masterPaneWindowCount = 1
+  resizePercent   = 5 / 1000
   -- Default proportion of screen occupied by master pane
   ratio   = 50 / 100
   mratio  = 70 / 100
-
-  -- Percent of screen to increment by when resizing panes
-  delta   = 5 / 1000
 
 ------------------------------------------------------------------------
 -- Window rules:
@@ -351,6 +347,7 @@ myManageHook = composeOne
   , stringProperty "WM_WINDOW_ROLE" =? "GtkFileChooserDialog" -?> doCenterFloat
   , resource =? "desktop_window" -?> doIgnore
   , resource =? "kdesktop" -?> doIgnore
+  , resource =? "volnoti"  -?> doF W.focusDown
   , return True -?> doF W.swapDown
   ]
 
@@ -404,6 +401,7 @@ myStartupHook = do
   spawnOnce "easyeffects --gapplication-service"
   spawnOnce "copyq &"
   spawnOnce "unclutter --ignore-scrolling --jitter 8 &"
+  spawnOnce "fusuma -d"
   setDefaultCursor xC_left_ptr
   addScreenCorners
     [ (SCUpperRight, spawn myRofi)
