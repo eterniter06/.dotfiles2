@@ -163,8 +163,6 @@ shopt -s cdspell
 # Consider removing this from here : Look into the hack xmonad module
 export _JAVA_AWT_WM_NONREPARENTING=1
 
-export GPG_TTY=$(tty)
-
 # fzf settings 
 fzf_dir="/usr/share/fzf"
 
@@ -183,7 +181,4 @@ source ~/qmk_firmware/util/qmk_tab_complete.sh
 # Askpass
 export SUDO_ASKPASS=$HOME/.local/bin/askpass-rofi
 
-# File for all additional path directories
-if [ -f "$HOME/.bash_paths" ]; then
-    . ~/.bash_paths
-fi
+export GPG_TTY=$(tty)
