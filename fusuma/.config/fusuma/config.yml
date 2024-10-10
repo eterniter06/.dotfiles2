@@ -4,11 +4,12 @@ swipe:
       command: 'xdotool key super+Left'
     right:
       command: 'xdotool key super+Right'
+  4:
     up:
       command: 'xdotool key XF86AudioRaiseVolume'
-      interval: 0.075
-      threshold: 0.4
+      interval: 0.1
+      threshold: 0.1
     down:
       command: 'xdotool key XF86AudioLowerVolume'
-      interval: 0.075
-      threshold: 0.4
+      interval: 0.1
+      threshold: 0.1
