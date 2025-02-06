@@ -13,10 +13,14 @@
 	interactive = auto
 	diff = auto
 [alias]
-	logg = log --graph --all
 	st = status
-	push = push --verbose
+    comm = commit --verbose
+    loga = log --graph --all
+    log2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset) %C(dim white)- %an%C(reset)%n''          %C(white)%s%C(reset)%n'
+    logd = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset) %C(dim white)- %an%C(reset)%n''          %C(bold white)%s%C(reset)%n%n%-b%n'
+    logg = log2 --all
+    last = logd -2 HEAD
+    unstage = stage --restore
 [commit]
 	gpgsign = true
-[merge]
-	conflictstyle = diff3
+    verbose = true
