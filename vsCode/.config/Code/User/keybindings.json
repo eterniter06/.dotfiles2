@@ -1,0 +1,29 @@
+// Place your key bindings in this file to override the defaultsauto[]
+[
+	{
+		"key": "ctrl+alt+b",
+		"command": "code-runner.run"
+	},
+	{
+		"key": "ctrl+alt+n",
+		"command": "-code-runner.run"
+	},
+	{
+		"key": "alt+j",
+		"command": "editor.action.moveLinesDownAction",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "alt+k",
+		"command": "editor.action.moveLinesUpAction",
+		"when": "editorTextFocus && !editorReadonly"
+	},
+	{
+		"key": "ctrl+alt+z",
+		"command": "codesnap.start"
+	}
+    ,{
+        "key": "ctrl+n",
+        "command": "explorer.newFile"
+    }
+]

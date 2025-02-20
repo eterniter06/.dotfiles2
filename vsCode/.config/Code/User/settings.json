@@ -1,0 +1,310 @@
+{
+	"[c, cpp]": {
+		"editor.defaultFormatter": "ms-vscode.cpptools"
+	},
+	"[haskell]": {
+		"editor.defaultFormatter": "haskell.haskell"
+	},
+	"[html, css, json, jsonc]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[java]": {
+		"editor.defaultFormatter": "redhat.java"
+	},
+	"[javascript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[plaintext]": {
+		"editor.unicodeHighlight.ambiguousCharacters": true,
+		"editor.unicodeHighlight.invisibleCharacters": true,
+		"editor.wordWrap": "on"
+	},
+
+	"better-comments.highlightPlainText": true,
+	"better-comments.multilineComments": true,
+	"better-comments.tags": [
+		{
+			"backgroundColor": "transparent",
+			"bold": false,
+			"color": "#FF2D00",
+			"italic": false,
+			"strikethrough": false,
+			"tag": "!",
+			"underline": false
+		},
+		{
+			"backgroundColor": "transparent",
+			"bold": false,
+			"color": "#3498DB",
+			"italic": false,
+			"strikethrough": false,
+			"tag": "?",
+			"underline": false
+		},
+		{
+			"backgroundColor": "transparent",
+			"bold": false,
+			"color": "#474747",
+			"italic": false,
+			"strikethrough": false,
+			"tag": "//",
+			"underline": false
+		},
+		{
+			"backgroundColor": "transparent",
+			"bold": false,
+			"color": "#FF8C00",
+			"italic": false,
+			"strikethrough": false,
+			"tag": "todo",
+			"underline": false
+		},
+		{
+			"backgroundColor": "transparent",
+			"bold": false,
+			"color": "#98C379",
+			"italic": false,
+			"strikethrough": false,
+			"tag": "*",
+			"underline": false
+		},
+		{
+			"backgroundColor": "transparent",
+			"bold": false,
+			"color": "#885040",
+			"italic": false,
+			"strikethrough": false,
+			"tag": "note",
+			"underline": false
+		}
+	],
+
+	"C_Cpp.autocompleteAddParentheses": true,
+	"C_Cpp.default.cppStandard": "c++17",
+	"C_Cpp.default.cStandard": "c17",
+	"C_Cpp.formatting": "vcFormat",
+	"C_Cpp.vcFormat.indent.braces": false,
+	"C_Cpp.vcFormat.indent.caseLabels": true,
+	"C_Cpp.vcFormat.indent.preserveComments": true,
+	"C_Cpp.vcFormat.newLine.beforeOpenBrace.block": "newLine",
+	"C_Cpp.vcFormat.newLine.beforeOpenBrace.function": "newLine",
+	"C_Cpp.vcFormat.newLine.beforeOpenBrace.lambda": "newLine",
+	"C_Cpp.vcFormat.newLine.beforeOpenBrace.namespace": "newLine",
+	"C_Cpp.vcFormat.newLine.beforeOpenBrace.type": "newLine",
+	"C_Cpp.vcFormat.newLine.beforeWhileInDoWhile": true,
+	"C_Cpp.vcFormat.newLine.closeBraceSameLine.emptyFunction": true,
+	"C_Cpp.vcFormat.newLine.closeBraceSameLine.emptyType": true,
+	"C_Cpp.vcFormat.newLine.scopeBracesOnSeparateLines": true,
+	"C_Cpp.vcFormat.space.afterCastCloseParenthesis": true,
+	"C_Cpp.vcFormat.space.afterKeywordsInControlFlowStatements": false,
+	"C_Cpp.vcFormat.space.betweenEmptyBraces": true,
+	"C_Cpp.vcFormat.space.insertAfterSemicolon": true,
+	"C_Cpp.vcFormat.space.pointerReferenceAlignment": "right",
+	"C_Cpp.vcFormat.space.withinInitializerListBraces": false,
+	"C_Cpp.vcFormat.wrap.preserveBlocks": "never",
+
+	"c-cpp-flylint.clang.blocks": false,
+	"c-cpp-flylint.clang.enable": false,
+	"c-cpp-flylint.flawfinder.enable": false,
+	"c-cpp-flylint.flexelint.enable": false,
+	"c-cpp-flylint.lizard.enable": false,
+
+	"code-runner.clearPreviousOutput": true,
+	"code-runner.customCommand": "clear",
+	"code-runner.enableAppInsights": false,
+	"code-runner.executorMap": {
+		"ahk": "autohotkey",
+		"applescript": "osascript",
+		"autoit": "autoit3",
+		"bat": "cmd /c",
+		"c": "cd $dir && gcc $fileName -std=c17 -O3 -Wextra -Wall -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+		"clojure": "lein exec",
+		"coffeescript": "coffee",
+		"cpp": "cd $dir && g++ $fileName -std=c++17 -O3 -Wextra -Wall -o $fileNameWithoutExt && $dir$fileNameWithoutExt", //added -std=c++17 for c++17
+		"crystal": "crystal",
+		"csharp": "scriptcs",
+		"d": "cd $dir && dmd $fileName && $dir$fileNameWithoutExt",
+		"dart": "dart",
+		"fortran": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+		"fortran_fixed-form": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+		"fortran-modern": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+		"FortranFreeForm": "cd $dir && gfortran $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+		"fsharp": "fsi",
+		"go": "go run",
+		"groovy": "groovy",
+		"haskell": "runhaskell",
+		"haxe": "haxe --cwd $dirWithoutTrailingSlash --run $fileNameWithoutExt",
+		"java": "cd $dir && javac $fileName && java $fileNameWithoutExt",
+		"javascript": "node",
+		"julia": "julia",
+		"kit": "kitc --run",
+		"less": "cd $dir && lessc $fileName $fileNameWithoutExt.css",
+		"lisp": "sbcl --script",
+		"lua": "lua",
+		"nim": "nim compile --verbosity:0 --hints:off --run",
+		"objective-c": "cd $dir && gcc -framework Cocoa $fileName -o $fileNameWithoutExt && $dir$fileNameWithoutExt",
+		"ocaml": "ocaml",
+		"pascal": "cd $dir && fpc $fileName && $dir$fileNameWithoutExt",
+		"perl": "perl",
+		"perl6": "perl6",
+		"php": "php",
+		"powershell": "powershell -ExecutionPolicy ByPass -File",
+		"python": "python -u",
+		"r": "Rscript",
+		"racket": "racket",
+		"ruby": "ruby",
+		"rust": "cd $dir && rustc $fileName && $dir$fileNameWithoutExt",
+		"sass": "sass --style expanded",
+		"scala": "scala",
+		"scheme": "csi -script",
+		"scss": "scss --style expanded",
+		"shellscript": "bash",
+		"swift": "swift",
+		"typescript": "ts-node",
+		"v": "v run",
+		"vbscript": "cscript //Nologo"
+	},
+	"code-runner.fileDirectoryAsCwd": true,
+	"code-runner.ignoreSelection": true,
+	"code-runner.preserveFocus": false,
+	"code-runner.runInTerminal": true,
+	"code-runner.saveFileBeforeRun": true,
+	"code-runner.temporaryFileName": "Temporary_snippet",
+
+	"dart.debugExternalPackageLibraries": true,
+	"dart.debugSdkLibraries": true,
+	"dart.openDevTools": "flutter",
+	"dart.warnWhenEditingFilesOutsideWorkspace": false,
+
+	"editor.autoClosingBrackets": "beforeWhitespace",
+	"editor.cursorBlinking": "smooth",
+	"editor.cursorSmoothCaretAnimation": "on",
+	"editor.detectIndentation": false,
+	"editor.fontFamily": "'Iosevka', 'Fira Code', 'Victor Mono'", // use with reverse teminal font famimly setting
+	"editor.fontLigatures": true,
+	//"editor.fontFamily": "'Victor Mono', 'Fira Code'",
+	// "editor.fontFamily": "Grand Hotel",          //Good cursive font, use with size 18 or 20
+	"editor.fontSize": 16,
+	"editor.formatOnPaste": true,
+	"editor.formatOnSave": true,
+	"editor.formatOnType": true,
+	"editor.guides.bracketPairs": "active",
+	"editor.largeFileOptimizations": false,
+	"editor.linkedEditing": true,
+	"editor.mouseWheelZoom": true,
+	"editor.suggestSelection": "first",
+	"editor.tabCompletion": "on",
+	"editor.tabSize": 4,
+	"editor.unicodeHighlight.ambiguousCharacters": true,
+	"editor.unicodeHighlight.includeComments": true,
+	"editor.unicodeHighlight.invisibleCharacters": true,
+
+	"errorLens.errorGutterIconColor": "#8329d6",
+	"errorLens.gutterIconsEnabled": true,
+	"errorLens.gutterIconSet": "borderless",
+	"errorLens.gutterIconSize": "contain",
+	"errorLens.warningGutterIconColor": "#4169e1",
+
+	"explorer.confirmDelete": false,
+	"explorer.confirmDragAndDrop": false,
+
+	"extensions.ignoreRecommendations": true,
+
+	"files.defaultLanguage": "cpp",
+	"files.exclude": {
+		"**/.classpath": true,
+		"**/.factorypath": true,
+		"**/.project": true,
+		"**/.settings": true
+	},
+
+	"git.openRepositoryInParentFolders": "never",
+
+	"gitlens.advanced.messages": {
+		"suppressGitMissingWarning": true
+	},
+	"gitlens.codeLens.scopes": ["document", "containers", "blocks"],
+	"gitlens.defaultTimeFormat": null,
+
+	"html.format.enable": false,
+	"html.format.indentInnerHtml": true,
+	"html.format.preserveNewLines": false,
+
+	"javascript.suggest.paths": false,
+
+	"liveServer.settings.donotShowInfoMsg": true,
+	"liveServer.settings.donotVerifyTags": true,
+
+	"path-intellisense.absolutePathToWorkspace": false,
+
+	"prettier.printWidth": 140,
+	"prettier.tabWidth": 4,
+	"prettier.useTabs": true,
+
+	"search.useIgnoreFiles": false,
+
+	"settingsSync.ignoredExtensions": ["ms-vscode-remote.remote-wsl", "vscjava.vscode-java-pack"],
+
+	"task.saveBeforeRun": "prompt",
+
+	"telemetry.telemetryLevel": "off",
+
+	"terminal.integrated.cursorBlinking": true,
+	"terminal.integrated.defaultProfile.windows": "PowerShell",
+	// "terminal.integrated.fontFamily": "'Fira Code', 'Victor Mono'",
+	"terminal.integrated.fontFamily": "'Victor Mono','Fira Code'", //use with reverse family font setting
+	"terminal.integrated.fontSize": 15,
+
+	"typescript.suggest.paths": false,
+
+	"vim.enableNeovim": true,
+	"vim.history": 75,
+	"vim.insertModeKeyBindings": [
+		{
+			"after": ["<Esc>"],
+			"before": ["j", "k"]
+		},
+		{
+			"after": ["<Esc>"],
+			"before": ["J", "K"]
+		}
+	],
+	"vim.neovimUseConfigFile": true,
+	"vim.useSystemClipboard": true,
+	"vim.handleKeys": {
+		"<C-p>": false,
+		"<C-b>": false,
+		"<C-e>": false,
+		"<C-w>": false
+	},
+
+	"vsicons.dontShowNewVersionMessage": true,
+
+	"window.menuBarVisibility": "toggle",
+
+	"workbench.colorCustomizations": {
+		"editorBracketHighlight.foreground1": "#ffffff",
+		"editorBracketHighlight.foreground2": "#2bffae",
+		"editorBracketHighlight.foreground3": "#28e6ff",
+		"editorBracketHighlight.foreground4": "#ee38ff",
+		"editorBracketHighlight.foreground5": "#ffbb28",
+		"editorBracketHighlight.foreground6": "#ff3535",
+		"editorBracketHighlight.unexpectedBracket.foreground": "#ff0008"
+	},
+	"workbench.colorTheme": "Catppuccin Mocha",
+	"workbench.iconTheme": "vscode-icons",
+	"workbench.layoutControl.enabled": true,
+	"workbench.layoutControl.type": "both",
+	"workbench.list.smoothScrolling": true,
+	"C_Cpp.intelliSenseEngine": "disabled",
+	"[json]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[scss]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"[typescript]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	},
+	"java.server.launchMode": "Standard"
+}

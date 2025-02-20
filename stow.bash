@@ -23,4 +23,5 @@ stow \
     wallpapers \
     x \
     xmobar \
-    xmonad
+    xmonad \
+    vsCode
