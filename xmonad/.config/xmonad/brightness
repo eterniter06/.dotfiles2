@@ -26,6 +26,8 @@ increase_brightness(){
         *)  increment_by_5
             xbacklight -set "$brightness";;
     esac
+
+    return 0;
 }
 
 increment_by_5(){
@@ -57,12 +59,14 @@ decrement_by_5(){
     brightness=$(echo "print(5 * round($brightness / 5))" | python3)
 }
 
+fontOptions=( "-f" "AtkinsonHyperlegible 12" )
+
 if [ "$1" == "-inc" ]; then
-    increase_brightness
-    volnoti-show -b "$brightness"
+    increase_brightness &&
+    volnoti-show -b "$brightness" -t "$brightness%" "${fontOptions[@]}"
 elif [ "$1" == "-dec" ]; then
     decrease_brightness
-    volnoti-show -b "$brightness"
+    volnoti-show -b "$brightness" -t "$brightness%" "${fontOptions[@]}"
 else
     echo "Unknown error encountered"
 fi

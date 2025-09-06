@@ -2,14 +2,16 @@
 
 increment_val=2
 
+fontOptions=( "-f" "AtkinsonHyperlegible 12" )
+
 volnotify(){
     toggle_status=$(awk -F"[][]" '/Left:/ { print $4 }' <(amixer sget Master))
     volume=$(awk -F"[][]" '/Left:/ { print $2 }' <(amixer sget Master))
 
     if [ "$toggle_status" == "on" ];then
-        volnoti-show "$volume"
+        volnoti-show "$volume" -t "$volume" "${fontOptions[@]}"
     else
-        volnoti-show -m "$volume"
+        volnoti-show -m "$volume" -t "$volume" "${fontOptions[@]}"
     fi
 }
 
@@ -27,9 +29,9 @@ toggle_mute(){
 
 navigatenotify(){
     if [ "$1" == "--next" ]; then
-        volnoti-show -p "/usr/share/pixmaps/volnoti/previous.svg" 101
-    elif [ "$1" == "--prev" ]; then
         volnoti-show -p "/usr/share/pixmaps/volnoti/next.svg" 101
+    elif [ "$1" == "--prev" ]; then
+        volnoti-show -p "/usr/share/pixmaps/volnoti/previous.svg" 101
     fi
 }
 
@@ -78,10 +80,10 @@ toggle_mic(){
 
     if [ "$muted" == "no" ] ; then
         amixer set Capture nocap -q && 
-        volnoti-show -p "/usr/share/pixmaps/volnoti/mic_muted.svg" "$mic_volume"
+        volnoti-show -p "/usr/share/pixmaps/volnoti/mic_muted.svg" "$mic_volume" -t "$mic_volume"  "${fontOptions[@]}"
     else
         amixer set Capture cap -q &&
-        volnoti-show -p "/usr/share/pixmaps/volnoti/mic_on.svg" "$mic_volume"
+        volnoti-show -p "/usr/share/pixmaps/volnoti/mic_on.svg" "$mic_volume" -t "$mic_volume" "${fontOptions[@]}"
     fi
 
 }
