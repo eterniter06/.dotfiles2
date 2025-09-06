@@ -21,9 +21,14 @@
 	{
 		"key": "ctrl+alt+z",
 		"command": "codesnap.start"
+	},
+	{
+		"key": "ctrl+n",
+		"command": "explorer.newFile"
+	},
+	{
+		"key": "ctrl+k",
+		"command": "-extension.vim_ctrl+k",
+		"when": "editorTextFocus && vim.active && vim.use<C-k> && !inDebugRepl"
 	}
-    ,{
-        "key": "ctrl+n",
-        "command": "explorer.newFile"
-    }
 ]
