@@ -80,7 +80,7 @@ Config {
                               , "--"
                                   , "-D", "intel_backlight"
                             ] 5
-                        , Run Com "bash" ["-c", "./.config/xmobar/xmobar_package_counter"] "checkupdates" 18000
+                        , Run Com "bash" ["-c", "./.config/xmobar/xmobar_package_counter"] "checkupdates" 9000
                     ]
        , sepChar = "%"
        , alignSep = "}{"
