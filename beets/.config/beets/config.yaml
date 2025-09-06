@@ -1,4 +1,4 @@
-directory: ~/jellyfin/media/Music
+directory: /media/Music/
 
 library: ~/.config/beets/MusicDataLibrary.db
 
