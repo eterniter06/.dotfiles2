@@ -10,7 +10,7 @@ set.conceallevel = 2
 
 -- Set update time to 1s (Default is 4)
 -- Duration before swap file is written
-set.updatetime = 1000
+set.updatetime = 2000
 
 -- 24 bit RGB TUI
 set.termguicolors = true
@@ -25,6 +25,11 @@ set.number = true
 
 -- Briefly display matching bracket
 set.showmatch = true
+
+-- autocomplete for menu and command
+set.wildmenu = true
+set.wildoptions = pum,fuzzy
+set.wildmode = "list:longest,full"
 
 -- LSP diagnostics symbols
 local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
