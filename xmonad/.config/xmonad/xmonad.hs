@@ -1,5 +1,6 @@
 import           Control.Monad (filterM,liftM, join)
 
+import           Data.Char (isDigit)
 import           Data.Monoid
 import           Data.IORef
 import           Data.List
@@ -107,7 +108,9 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
     -- Workspace keybinds
     [ ((modm, xK_Up), windows W.focusUp)
     , ((modm, xK_Down), windows W.focusDown)
+    , ((modm .|. controlMask, xK_Left), prevWS)
     , ((modm, xK_Left), prevWS)
+    , ((modm .|. controlMask, xK_Right), nextWS)
     , ((modm, xK_Right), nextWS)
 
     , ((modm .|. shiftMask, xK_Up), windows W.swapDown)
@@ -119,9 +122,10 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
     ++
 
     -- Power keybinds
-    [ ((modm .|. shiftMask, xK_s), spawn "systemctl suspend")
-    , ((modm .|. shiftMask, xK_u), spawn "systemctl poweroff")
+    [ 
+      ((modm .|. shiftMask, xK_u), spawn "systemctl poweroff")
     , ((modm .|. shiftMask, xK_o), spawn "systemctl reboot")
+    , ((modm .|. shiftMask, xK_s), spawn "systemctl sleep && slock")
     ]
 
     ++
@@ -137,7 +141,7 @@ myKeys conf@(XConfig { XMonad.modMask = modm }) =
     ++
 
     -- Screenshot keybinds
-    [ ((modm, xK_s), spawn screenshot)
+    [ ((modm , xK_s), spawn screenshot)
     , ((0, xK_Print), spawn fullScreenshot)
     ]
 
@@ -278,10 +282,10 @@ myMouseBindings XConfig { XMonad.modMask = modm } =
       , ((modm, button2), \w -> focus w >> windows W.shiftMaster)
 
     -- mod-button3, Set the window to floating mode and resize by dragging
-      , ((modm, button3), \w -> focus w >> mouseResizeWindow w >> windows W.shiftMaster)      , ((0, frontThumbButton), \w -> nextWS)
-      
-      , ((0, backThumbButton), \w -> prevWS)
-      , ((0, backThumbButton), \w -> prevWS)
+      , ((modm, button3), \w -> focus w >> mouseResizeWindow w >> windows W.shiftMaster)
+
+    --, ((0, frontThumbButton), \w -> nextWS)
+    --, ((0, backThumbButton), \w -> prevWS)
     -- you may also bind events to the mouse scroll wheel (button4 and button5)
       ]
  where
@@ -393,15 +397,18 @@ toggleFadeOut w s | w `S.member` s = S.delete w s
 -- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
 -- per-workspace layout choices.
 myStartupHook = do
-  spawnOnce "volnoti -t 1.4 -a 0.25 -r 25" -- Volume notificaiton daemon | Responsible for the volume indication overlay
+  spawnOnce "dbus-update-activate-environment --all"
+  spawnOnce "gnome-keyring-daemon --start --components=secrets"
+  spawnOnce "volnoti -t 1.6 -a 0.35 -r 25" -- Volume notificaiton daemon | Responsible for the volume indication overlay
   spawnOnce "$HOME/.config/xmonad/caps &"
-  spawnOnce "picom &"
+  spawnOnce "picom --daemon"
   spawnOnce "dunst &"
   spawnOnce "$HOME/.config/nitrogen/start-auto-nitrogen &" -- wallpaper script
   spawnOnce "easyeffects --gapplication-service"
   spawnOnce "copyq &"
   spawnOnce "unclutter --ignore-scrolling --jitter 8 &"
   spawnOnce "fusuma -d"
+  spawnOnce "xautolock -time 15 -locker slock"
   setDefaultCursor xC_left_ptr
   addScreenCorners
     [ (SCUpperRight, spawn myRofi)
@@ -414,24 +421,28 @@ myStartupHook = do
 
 myXMobarPP = def
   { ppLayout = ppLayoutPrinter
-  , ppCurrent = royalBluePP . discardSecondString wsIconFull
-  , ppVisible = purplePP . discardSecondString wsIconFull
-  , ppHidden = lowWhitePP . discardSecondString wsIconFull
-  , ppHiddenNoWindows = lowWhitePP . discardSecondString wsIconEmpty 
+  , ppCurrent = royalBluePP . workspaceIcon True  False   -- current, not empty
+  , ppVisible = purplePP   . workspaceIcon False False   -- visible, not empty
+  , ppHidden  = lowWhitePP . workspaceIcon False False   -- hidden, not empty
+  , ppHiddenNoWindows = lowWhitePP . workspaceIcon False True -- hidden & empty
   , ppTitle = myPPTitle
-
-  -- set separator manually for each entry
   , ppSep = ""
-
   }
 
-discardSecondString :: String -> String -> String
-discardSecondString a b = a
+-- Base directory for your workspace icons
+iconDir :: String
+iconDir = "/home/infinity/.config/xmobar/xpm/"
 
-wsIconFull, wsIconEmpty, wsIconHidden :: String
-wsIconFull   = "   <fn=1>\xf111</fn>   "
-wsIconHidden = "   <fn=1>\xf111</fn>   "
-wsIconEmpty  = "   <fn=1>\xf10c</fn>   "
+-- Generate workspace icon with empty support
+workspaceIcon :: Bool -> Bool -> String -> String
+workspaceIcon isCurrent isEmpty wsName
+  | all isDigit wsName =
+      let suffix
+            | isEmpty    = "_empty"
+            | isCurrent  = "_selected"
+            | otherwise  = ""
+      in wrapIcon (iconDir ++ "workspace" ++ wsName ++ suffix ++ ".xpm")
+  | otherwise = wrapIcon (iconDir ++ "workspace_fallback.xpm")
 
 wrapIcon :: String -> String
 wrapIcon absoluteIconDirectory = wrap "    <icon=" "/>      " absoluteIconDirectory
@@ -469,7 +480,7 @@ main = do
 defaults = def {
       -- simple stuff
                  terminal           =  "kitty"
-               , focusFollowsMouse  = True
+               , focusFollowsMouse  = False
                , clickJustFocuses   = False
                , borderWidth        = 2
                , modMask            = winKey
