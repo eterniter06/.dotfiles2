@@ -1,4 +1,4 @@
-export PATH="$PATH:/home/infinity/Flutter/bin"
+export PATH="$PATH:/home/infinity/FlutterSdk/bin"
 export PATH="$PATH:/home/infinity/.local/bin:$PATH"
 
 export GEM_HOME="$(gem env user_gemhome)"

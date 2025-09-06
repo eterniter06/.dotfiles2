@@ -182,3 +182,9 @@ source ~/qmk_firmware/util/qmk_tab_complete.sh
 export SUDO_ASKPASS=$HOME/.local/bin/askpass-rofi
 
 export GPG_TTY=$(tty)
+
+# File for all additional path directories
+if [ -f "$HOME/.bash_paths" ]; then
+    . ~/.bash_paths
+fi
+
