@@ -1,6 +1,6 @@
 [user]
 	name = Himanshu Himsurya
-	signingkey = 2876E3F8FD8C1B76
+	signingkey = 940DF408D1A30A8F
 	email = himanshuhimsurya@gmail.com
 [core]
 	editor = nvim
@@ -14,7 +14,6 @@
 	diff = auto
 [alias]
 	st = status
-    comm = commit --verbose
     loga = log --graph --all
     log2 = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset) %C(dim white)- %an%C(reset)%n''          %C(white)%s%C(reset)%n'
     logd = log --graph --abbrev-commit --decorate --format=format:'%C(bold blue)%h%C(reset) - %C(bold cyan)%aD%C(reset) %C(bold green)(%ar)%C(reset)%C(auto)%d%C(reset) %C(dim white)- %an%C(reset)%n''          %C(bold white)%s%C(reset)%n%n%-b%n'
