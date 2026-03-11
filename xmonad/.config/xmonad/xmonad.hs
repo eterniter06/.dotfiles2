@@ -54,7 +54,7 @@ import qualified XMonad.StackSet               as W
 -- A tagging example:
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
-myWorkspaces = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"]
+myWorkspaces = ["0", "1", "2", "3", "4", "5", "6", "7", "8", "9"]
 
 -- Border colors
 borderWhite, borderBlack:: String
