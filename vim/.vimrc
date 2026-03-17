@@ -43,13 +43,34 @@ nnoremap N Nzzzv
 
 " show cursorline in insert mode
 :autocmd InsertEnter,InsertLeave * set cul!
+
+function! FormatJSON()
+    let l:input = join(getline(1, '$'), "\n")
+    let l:output = system('jq .', l:input)
+
+    if v:shell_error
+        echohl ErrorMsg
+        echo substitute(l:output, '\n$', '', '')
+        echohl None
+        throw "jq failed"
+    endif
+
+    call setline(1, split(l:output, "\n"))
+endfunction
+
 augroup jsonGroup
     autocmd!
-    autocmd FileType json autocmd BufWritePre <buffer> %!jq .
+    autocmd BufWritePre *.json call FormatJSON()
+augroup END
+
+augroup jsonGroup
+    autocmd!
+    autocmd FileType json autocmd BufWritePre <buffer> call FormatJSON()
 augroup END
 
 if v:version < 802
     packadd! dracula
 endif
+
 syntax enable
 colorscheme dracula
