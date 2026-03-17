@@ -5,3 +5,4 @@ alias lt="eza -TM --smart-group"
 alias :q='exit'
 alias cd..='cd ..'
 alias audo='sudo -A'
+alias path="echo '$PATH' | tr : '\n'"

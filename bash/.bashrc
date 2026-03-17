@@ -144,10 +144,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-mkcd(){
-    mkdir -p "$1" && cd "$_";
-}
-
 # Use vim mode in bash
 # set -o vi
 # bind '"jk":vi-movement-mode'

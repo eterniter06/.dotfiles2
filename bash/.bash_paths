@@ -1,7 +1,9 @@
-export PATH="$PATH:/home/infinity/FlutterSdk/bin"
-export PATH="$PATH:/home/infinity/.local/bin:$PATH"
+#/bin/bash
 
+# Prepend to path; First entry to PATH will be at the bottom here (Stack)
 export GEM_HOME="$(gem env user_gemhome)"
-export PATH="$PATH:$GEM_HOME/bin"
+export PATH="$GEM_HOME/bin:$PATH"
 
-export JAVA_HOME="$HOME/Android/android-studio/jbr"
+export PATH="/opt/android-studio/bin:$PATH"
+export PATH="/home/infinity/FlutterSdk/bin:$PATH"
+export PATH="/home/infinity/.local/bin:$PATH"
